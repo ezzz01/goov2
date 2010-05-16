@@ -1,0 +1,4 @@
+log/*.log
+temp/**/*
+doc/api
+doc/app
