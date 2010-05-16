@@ -40,6 +40,7 @@ Rails::Initializer.run do |config|
    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
    config.i18n.default_locale = :lt
 
+   config.gem "authlogic"
 end
 
 require File.join(File.dirname(__FILE__), '..', 'lib', 'arturaz', 'as_lt_words.rb')

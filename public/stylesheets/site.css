@@ -1,0 +1,295 @@
+body {
+font-family: sans-serif;
+background: white;
+margin: 4;
+text-align: left;
+}
+
+h1 {
+font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 24px;
+	margin-bottom: 22px;
+	color: #333;
+}
+
+h2 {
+font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 22px;
+	margin-bottom: 22px;
+	color: #333;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+fieldset{
+  margin-top: 1em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+legend{
+  padding: .4em 1em;
+}
+
+.form_row{
+  white-space: nowrap;
+  padding-bottom: .5em;
+}
+
+pre{
+  background-color:#DDDDDD;
+  font-size:90%;
+  overflow:auto;
+  padding:1em;
+}
+
+label{
+  display: block;
+  padding-bottom: 10px;
+}
+
+.submit{
+  margin-left: 12.5em;
+}
+
+.bolder{
+  font-weight: bold;
+}
+
+.smaller{
+  font-size: small;
+}
+
+#notice {
+  border: 1px solid;
+  padding: 1em;
+  margin: 1em;
+  margin-bottom: 2em;
+  font: bold;
+}
+
+#error{
+  border: 1px solid red;
+  padding: 1em;
+  margin: 1em;
+  margin-bottom: 2em;
+  font: bold;
+}
+.wiki_content {
+  border: 1px solid #999999;
+  padding: 1em;
+  margin: 0.5em;
+  margin-bottom: 2em;
+}
+
+.edit_history{
+  border: 1px solid #999999;
+  padding: 1em;
+  margin: 0.5em;
+  font-size: smaller;
+}
+
+.debug_dump{
+  border-top: 1px dashed black;
+  text-align: left;
+  background: #ccc;
+  margin: 0;
+  padding: .5em;
+}
+
+.fieldWithErrors {
+  margin: 2px;
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12pt;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 11pt;
+  list-style: square;
+}
+
+.css1 { font-size: 1.0em; }
+.css2 { font-size: 1.0em; }
+.css3 { font-size: 1.3em; }
+.css4 { font-size: 1.7em; }
+.css5 { font-size: 2.0em; }
+
+.newWikiWord { background: #f8d8d8;}
+
+span.post_date{
+  font-size: 11px;
+}
+
+span.post_title{
+  font-weight: bold;
+}
+
+.activity {
+  margin: 4px;
+  padding: 2px;
+}
+
+.notice{
+  font-size: 11px;
+  color: #ff0000;
+}
+
+.modal{
+    margin: 4px;
+}
+
+form div {
+    padding: 10px;
+}
+
+img {
+    border: #999999;
+}
+
+.question {
+    font-size: smaller; 
+    background-color: #eaeaea;
+    border: 1px solid #bababa;
+    margin: 4px;
+    padding: 4px;
+}
+
+.question_header {
+  padding-bottom: 4px;
+}
+
+.comments {
+    background-color: #efefef;
+    margin: 10px;
+}
+
+.comment {
+    background-color: #eaeaea;
+    border: 1px solid #aaaaaa;
+    padding: 4px;
+    margin: 4px;
+}
+
+.valign_middle{
+  vertical-align:middle;
+}
+
+.float_left{
+  float: left;
+}
+
+.float_right{
+  float: right;
+}
+
+.blog_post_header {
+    background-color: #eaeaea;
+    border: 1px solid #aaaaaa;
+    padding: 4px;
+    margin: 4px;
+}
+
+.blog_post_body {
+    padding: 4px;
+    margin: 4px;
+    padding-bottom: 20px;
+}
+
+.blog_post_footer {
+    border: 1px solid #aaaaaa;
+    padding: 4px;
+    margin: 12px;
+    margin-bottom: 20px;
+}
+
+.comment_form {
+    margin-left: 12px;
+}
+
+#main {
+    float: left; 
+    width: 75%;
+    }
+
+#sidebar { 
+    float: right;
+    width: 25%;
+    }
+
+.gooutuser {
+  font-weight: bold;
+}
+
+span.span_separator {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+div.spacer {
+  height: 20px;
+}
+
+.profile_block {
+  padding-bottom: 14px;
+}
+
+.answer_short {
+    margin: 4px;
+    padding-left: 4px;
+    border-top: 1px dashed;
+    color: #999999;
+}
+
+.answer {
+    margin: 4px;
+    padding-left: 4px;
+    border-top: 1px dashed;
+}
+
+h3.ask_question {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.wiki_updates {
+  width: 500px;
+  margin 4px;
+  padding: 4px;
+  border: 1px solid  #aaaaaa;
+  font-size: 12px;
+}
+
+.user_row{
+  min-height: 50px;
+}
+
+.user_avatar{
+  min-width: 50px;
+}

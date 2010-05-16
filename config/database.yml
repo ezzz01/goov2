@@ -1,7 +1,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: su_development
+  database: goout_development
   username: root
   password: ezhux
   host: localhost
@@ -12,7 +12,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: su_test
+  database: goout_test
   username: root
   password: ezhux
   host: localhost
@@ -21,7 +21,7 @@ production:
   adapter: mysql
   reconnect: true
   encoding: utf8
-  database: su_production
+  database: goout_production
   username: root
   password: 
   host: localhost

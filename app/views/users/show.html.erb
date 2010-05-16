@@ -1,0 +1,43 @@
+<p>
+  <b>Username:</b>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+  <b>Blog url:</b>
+  <%=h @user.blog_url %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%=h @user.gender %>
+</p>
+
+<p>
+  <b>Birthdate:</b>
+  <%=h @user.birthdate %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+<p>
+  <b>Surname:</b>
+  <%=h @user.surname %>
+</p>
+
+<p>
+  <b>Current country:</b>
+  <%=h @user.current_country %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

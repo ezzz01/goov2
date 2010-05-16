@@ -1,0 +1,31 @@
+<h2><%=t :register %></h2>
+<%= error_messages_for 'user' %>
+<% form_for(@user) do |f| %>
+  <fieldset>
+    <legend><%=t :enter_your_details %></legend>
+    <div class="form_row">
+      <label for="username"><%=t :username %></label>
+    <%= f.text_field :username, :size => User::USERNAME_SIZE, :maxlength => User::USERNAME_MAX_LENGTH%>
+    </div>
+
+    <div class="form_row">
+    <label for="email"><%=t :email %></label>
+    <%= f.text_field :email, :size => User::EMAIL_SIZE, :maxlength => User::EMAIL_MAX_LENGTH %><br />
+    <span class="smaller"><%= t(:email_hint) %></span>
+    </div>
+
+    <div class="form_row">
+    <label for="password"><%=t :password %></label>
+    <%= f.password_field :password, :size => User::PASSWORD_SIZE, :maxlength => User::PASSWORD_MAX_LENGTH %>
+    </div>
+
+    <div class="form_row">
+    <label for="password_confirn"><%=t :password_confirm %></label>
+    <%= f.password_field :password_confirmation, :size => User::PASSWORD_SIZE, :maxlength => User::PASSWORD_MAX_LENGTH %>
+    </div>
+
+    <div class="form_row">
+    <%= f.submit t(:register_button), :class => "submit" %>
+    </div>
+  </fieldset>
+<% end %>

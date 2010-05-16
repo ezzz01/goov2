@@ -212,7 +212,7 @@
   :company => "Įmonė",
   :ngo => "Nevyriausybinė organizacija",
   #custom_errors
-  :username_error => "turi susidėti tik iš raidžių, skaičių, brūkšių (-) ir pabraukimo brūkšnių (-)",
+  :username_error => "turi susidėti tik iš raidžių, skaičių, brūkšnių (-) ir pabraukimo brūkšnių (_)",
   :no_spaces => "neturi turėti tarpų",
   :not_correct => "neteisingas",
   :must_be_valid => "turi būti teisingas",
@@ -224,6 +224,7 @@
         :attributes => {
           :username => "Vartotojo vardas",
           :password => "Slaptažodis",
+          :password_confirmation => "Slaptažodžio patvirtinimas",
           :email => "El. pašto adresas",
           :blog_url => "Tinklaraščio adresas",
           :avatar => "Avataras",
@@ -242,6 +243,7 @@
         :user => {  
           :username => "Vartotojo vardas",
           :password => "Slaptažodis",
+          :password_confirmation => "Slaptažodžio patvirtinimas",
           :email => "El. paštas",
           :blog_url => "Tinklaraščio adresas",
         },
