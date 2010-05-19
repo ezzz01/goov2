@@ -43,12 +43,6 @@ class User < ActiveRecord::Base
                          :allow_nil => true,
                          :message => "neteisinga data"
 
-  def validate
-    if username.include?(" ")
-      errors.add(:username, I18n.t(:no_spaces))
-    end
-  end
-
   def name_surname
     if !self.name.nil? && !self.surname.nil?
       self.name + " " + self.surname

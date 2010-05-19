@@ -1,16 +1,16 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  username: MyString
-  crypted_password: MyString
-  password_salt: MyString
+  username: myFirstUser 
+  password_salt: <%= salt = Authlogic::Random.hex_token %> 
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("pass" + salt) %>
   email: MyString
-  persistence_token: MyString
+  persistence_token: <%= Authlogic::Random.hex_token %> 
   blog_url: MyString
   last_login_ip: MyString
   current_login_ip: MyString
   gender: MyString
-  birthday: 2010-05-16
+  birthdate: 2010-05-16
   name: MyString
   surname: MyString
   current_country: 1
@@ -25,7 +25,7 @@ two:
   last_login_ip: MyString
   current_login_ip: MyString
   gender: MyString
-  birthday: 2010-05-16
+  birthdate: 2010-05-16
   name: MyString
   surname: MyString
   current_country: 1

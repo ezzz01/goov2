@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+
+  setup :activate_authlogic
+
+  def setup
+    @user = users(:one)
+  end
+
   test "should get index" do
     get :index
     assert_response :success
@@ -14,10 +21,15 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, :user => { }
+      post :create, :user => { :username => "testuser", :email => "test@email.lt", :password => "mypass", :password_confirmation => "mypass" }
     end
 
     assert_redirected_to user_path(assigns(:user))
+  end
+
+  test "should not create user" do
+      post :create, :user => { :username => "testuser", :email => "test@email.lt", :password => "mypass2", :password_confirmation => "mypass" }
+      assert_template "register"
   end
 
   test "should show user" do
