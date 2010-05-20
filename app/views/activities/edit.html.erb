@@ -1,0 +1,48 @@
+<h1>Editing activity</h1>
+
+<% form_for(@activity) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :study_program_id %><br />
+    <%= f.text_field :study_program_id %>
+  </p>
+  <p>
+    <%= f.label :exchange_program_id %><br />
+    <%= f.text_field :exchange_program_id %>
+  </p>
+  <p>
+    <%= f.label :activity_area_id %><br />
+    <%= f.text_field :activity_area_id %>
+  </p>
+  <p>
+    <%= f.label :from %><br />
+    <%= f.date_select :from %>
+  </p>
+  <p>
+    <%= f.label :to %><br />
+    <%= f.date_select :to %>
+  </p>
+  <p>
+    <%= f.label :current %><br />
+    <%= f.check_box :current %>
+  </p>
+  <p>
+    <%= f.label :country_id %><br />
+    <%= f.text_field :country_id %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @activity %> |
+<%= link_to 'Back', activities_path %>

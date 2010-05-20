@@ -1,0 +1,30 @@
+<h1>Listing concepts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Type</th>
+    <th>Added by</th>
+    <th>Subject area</th>
+    <th>Country</th>
+    <th>Goout intern</th>
+  </tr>
+
+<% @concepts.each do |concept| %>
+  <tr>
+    <td><%=h concept.title %></td>
+    <td><%=h concept.type %></td>
+    <td><%=h concept.added_by %></td>
+    <td><%=h concept.subject_area_id %></td>
+    <td><%=h concept.country_id %></td>
+    <td><%=h concept.goout_intern %></td>
+    <td><%= link_to 'Show', concept %></td>
+    <td><%= link_to 'Edit', edit_concept_path(concept) %></td>
+    <td><%= link_to 'Destroy', concept, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New concept', new_concept_path %>

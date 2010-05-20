@@ -22,5 +22,13 @@ module ApplicationHelper
     end
   end
 
+  def find_user(params)
+    if params[:user] 
+      @user = User.find_by_username(params[:user])
+    else
+      @user = User.find(params[:id])
+      redirect_to user_path(@user.try(:username)) if @user
+    end
+  end
  
 end

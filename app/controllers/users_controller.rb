@@ -13,11 +13,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
+    find_user(params)
+    if @user
+      @title = t(:user_profile, :username => @user.username)
+     # @posts = @user.posts
+     # @activities = @user.activities
+      respond_to do |format|
+        format.html 
+      end
+    else 
+      flash[:notice] = t(:no_such_user)
+        redirect_to users_path
     end
   end
 

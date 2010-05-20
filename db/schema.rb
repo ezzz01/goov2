@@ -9,7 +9,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100516183115) do
+ActiveRecord::Schema.define(:version => 20100520202504) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "type"
+    t.integer  "user_id"
+    t.integer  "study_program_id"
+    t.integer  "exchange_program_id"
+    t.integer  "activity_area_id"
+    t.date     "from"
+    t.date     "to"
+    t.boolean  "current"
+    t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "concepts", :force => true do |t|
+    t.string   "title"
+    t.string   "type"
+    t.integer  "added_by"
+    t.integer  "subject_area_id"
+    t.integer  "country_id"
+    t.boolean  "goout_intern"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_sessions", :force => true do |t|
     t.string   "username"

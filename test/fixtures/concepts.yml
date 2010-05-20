@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  type: MyString
+  added_by: 1
+  subject_area_id: 1
+  country_id: 1
+  goout_intern: false
+
+two:
+  title: MyString
+  type: MyString
+  added_by: 1
+  subject_area_id: 1
+  country_id: 1
+  goout_intern: false

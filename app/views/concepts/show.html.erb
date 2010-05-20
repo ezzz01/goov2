@@ -1,0 +1,33 @@
+<p>
+  <b>Title:</b>
+  <%=h @concept.title %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%=h @concept.type %>
+</p>
+
+<p>
+  <b>Added by:</b>
+  <%=h @concept.added_by %>
+</p>
+
+<p>
+  <b>Subject area:</b>
+  <%=h @concept.subject_area_id %>
+</p>
+
+<p>
+  <b>Country:</b>
+  <%=h @concept.country_id %>
+</p>
+
+<p>
+  <b>Goout intern:</b>
+  <%=h @concept.goout_intern %>
+</p>
+
+
+<%= link_to 'Edit', edit_concept_path(@concept) %> |
+<%= link_to 'Back', concepts_path %>

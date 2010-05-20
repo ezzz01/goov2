@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: MyString
+  user_id: 1
+  study_program_id: 1
+  exchange_program_id: 1
+  activity_area_id: 1
+  from: 2010-05-20
+  to: 2010-05-20
+  current: false
+  country_id: 1
+
+two:
+  type: MyString
+  user_id: 1
+  study_program_id: 1
+  exchange_program_id: 1
+  activity_area_id: 1
+  from: 2010-05-20
+  to: 2010-05-20
+  current: false
+  country_id: 1

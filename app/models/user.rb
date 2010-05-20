@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic
+  
+  has_many :activities
 
   attr_accessor :remember_me
   attr_accessor :current_password
