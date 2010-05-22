@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   has_many :activities
+  has_one :avatar, :dependent => :destroy
+  has_many :userroles, :class_name => "UserRole"
+  has_many :roles, :through => :userroles
 
   attr_accessor :remember_me
   attr_accessor :current_password

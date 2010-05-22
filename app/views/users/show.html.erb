@@ -1,3 +1,11 @@
+<div class="spacer"></div>
+
+<% unless @user.avatar.nil? %>
+  <div class="profile_block">
+    <%= avatar_for(@user, "") %>
+  </div>
+<% end %>
+
 <p>
   <b>Username:</b>
   <%=h @user.username %>

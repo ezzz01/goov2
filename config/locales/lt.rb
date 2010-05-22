@@ -187,6 +187,8 @@
   :for_page => "puslapiui",
   :new_revision => "Nauja revizija",
   #errors
+  :filesize_exceeded => "Maksimalus failo dydis yra 500Kb",
+  :image_type_wrong => "Failo tipas turi būti vienas iš GIF, JPG, PNG",
   :error_on_saving => "Klaida išsaugant",
   :error_saving_university => "Klaida išsaugant. Gal toks universitetas jau yra?",
   :error_saving_organization => "Klaida išsaugant. Gal tokia organizacija jau yra?",

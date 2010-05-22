@@ -1,0 +1,2 @@
+class Organization < Concept
+end

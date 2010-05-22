@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100520202504) do
+ActiveRecord::Schema.define(:version => 20100522104435) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(:version => 20100520202504) do
     t.datetime "updated_at"
   end
 
+  create_table "avatars", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "content_type"
+    t.string   "filename"
+    t.string   "thumbnail"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "concepts", :force => true do |t|
     t.string   "title"
     t.string   "type"
@@ -32,6 +45,19 @@ ActiveRecord::Schema.define(:version => 20100520202504) do
     t.integer  "subject_area_id"
     t.integer  "country_id"
     t.boolean  "goout_intern"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_roles", :force => true do |t|
+    t.integer  "user"
+    t.integer  "role"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

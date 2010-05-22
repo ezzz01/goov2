@@ -1,6 +1,7 @@
 <h1>Editing user</h1>
+<%= error_messages_for :user, :avatar %>
 
-<% form_for(@user) do |f| %>
+<% form_for(@user, :html => { :multipart => true }) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -16,8 +17,9 @@
     <%= f.text_field :blog_url %>
   </p>
   <p>
-    <%= f.label :gender %><br />
-    <%= f.text_field :gender %>
+    <b><%= f.label :gender, t(:gender) %></b>
+      <%= f.radio_button :gender, "Jis" %><%= t(:he) %>
+      <%= f.radio_button :gender, "Ji" %><%= t(:she) %>
   </p>
   <p>
     <%= f.label :birthdate %><br />
@@ -36,7 +38,13 @@
     <%= f.text_field :current_country %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <b><%= f.label :avatar_file, t(:avatar) %></b>
+    <%= file_field_tag :avatar_file %>
+  </p>
+
+  <p>
+    <%= f.hidden_field :updating_user %>
+    <%= f.submit t(:update) %>
   </p>
 <% end %>
 

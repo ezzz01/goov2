@@ -27,8 +27,18 @@ module ApplicationHelper
       @user = User.find_by_username(params[:user])
     else
       @user = User.find(params[:id])
+      puts "got here" + @user.inspect
       redirect_to user_path(@user.try(:username)) if @user
     end
   end
  
+  def avatar_for(user, size = :medium)
+    if user.avatar
+      avatar_image = user.avatar.public_filename(size)
+        link_to image_tag(avatar_image), user.avatar.public_filename
+    else
+      image_tag("blank-cover-#{size}.png" )
+    end
+  end
+
 end

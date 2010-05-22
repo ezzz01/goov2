@@ -59,16 +59,28 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+ @user = User.find(params[:id])
+    @avatar = Avatar.new(:uploaded_data => params[:avatar_file])
+    @service = UserService.new(@user, @avatar)
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
-        flash[:notice] = 'User was successfully updated.'
-        format.html { redirect_to(@user) }
-        format.xml  { head :ok }
+      #if we have an uploaded avatar
+      if params[:avatar_file]
+        if @service.update_attributes(params[:user], params[:avatar_file])
+          flash[:notice] = t(:user_was_successfully_updated) 
+          format.html { redirect_to user_profile_path(@user.try(:username)) }
+        else
+          @avatar = @service.avatar
+          format.html { render :action => "edit" }
+        end
+      #no avatar file
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+        if @user.update_attributes(params[:user])
+          flash[:notice] =  t(:user_was_successfully_updated) 
+          format.html { redirect_to user_profile_path(@user.try(:username)) }
+        else
+          format.html { render :action => "edit" }
+        end
       end
     end
   end

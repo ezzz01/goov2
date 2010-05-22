@@ -3,3 +3,4 @@ temp/**/*
 doc/api
 doc/app
 *.sw?
+public/avatars/**/*
