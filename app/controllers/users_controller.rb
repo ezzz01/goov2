@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
+
   # GET /users
   # GET /users.xml
   def index
@@ -48,7 +50,7 @@ class UsersController < ApplicationController
         @user = User.new(params[:user])
         if @user.save
           flash[:notice] = t(:registration_successful) 
-          format.html { redirect_to(@user) }
+          format.html { redirect_to user_profile_path(@user.try(:username)) }
         else 
           @user.clear_password!
           format.html { render :action => "new" }
@@ -59,13 +61,13 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
- @user = User.find(params[:id])
+    @user = User.find(params[:id])
     @avatar = Avatar.new(:uploaded_data => params[:avatar_file])
-    @service = UserService.new(@user, @avatar)
 
     respond_to do |format|
       #if we have an uploaded avatar
       if params[:avatar_file]
+        @service = UserService.new(@user, @avatar)
         if @service.update_attributes(params[:user], params[:avatar_file])
           flash[:notice] = t(:user_was_successfully_updated) 
           format.html { redirect_to user_profile_path(@user.try(:username)) }
