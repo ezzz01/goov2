@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+    @users = User.paginate(:page => params[:page], :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       end
     else 
       flash[:notice] = t(:no_such_user)
-        redirect_to users_path
+      redirect_to users_path
     end
   end
 

@@ -1,6 +1,6 @@
 class CreateUserSessions < ActiveRecord::Migration
   def self.up
-    create_table :user_sessions do |t|
+    create_table :user_sessions, :options => 'default charset=utf8' do |t|
       t.string :username
       t.string :password
 

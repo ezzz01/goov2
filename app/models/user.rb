@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   has_one :avatar, :dependent => :destroy
   has_many :userroles, :class_name => "UserRole"
   has_many :roles, :through => :userroles
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   attr_accessor :remember_me
   attr_accessor :current_password

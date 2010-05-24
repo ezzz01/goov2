@@ -1,6 +1,6 @@
 class CreateConcepts < ActiveRecord::Migration
   def self.up
-    create_table :concepts do |t|
+    create_table :concepts, :options => 'default charset=utf8' do |t|
       t.string :title
       t.string :type
       t.integer :added_by

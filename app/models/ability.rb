@@ -20,7 +20,7 @@ class Ability
         can :update_study_programs, :all
         can :update_fields, :all
 
-        can :create, [User]
+        can :create, [User, Friendship]
 
 #        if user.try(:username)
 #          can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
@@ -54,9 +54,9 @@ class Ability
 #            comment.try(:user) == user || comment.try(:post).try(:user) == user
 #        end
 
-#        can :destroy, Friendship do |friendship|
-#            friendship.try(:user) == user
-#        end
+         can :destroy, Friendship do |friendship|
+             friendship.try(:user) == user
+         end
 
       end
   end

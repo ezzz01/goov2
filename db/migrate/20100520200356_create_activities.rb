@@ -1,6 +1,6 @@
 class CreateActivities < ActiveRecord::Migration
   def self.up
-    create_table :activities do |t|
+    create_table :activities, :options => 'default charset=utf8' do |t|
       t.string :type
       t.integer :user_id
       t.integer :study_program_id

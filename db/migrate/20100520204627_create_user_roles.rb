@@ -1,6 +1,6 @@
 class CreateUserRoles < ActiveRecord::Migration
   def self.up
-    create_table :user_roles do |t|
+    create_table :user_roles, :options => 'default charset=utf8' do |t|
       t.integer :user_id
       t.integer :role_id
 

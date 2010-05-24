@@ -1,6 +1,6 @@
 class CreateRoles < ActiveRecord::Migration
   def self.up
-    create_table :roles do |t|
+    create_table :roles, :options => 'default charset=utf8' do |t|
       t.string :title
 
       t.timestamps

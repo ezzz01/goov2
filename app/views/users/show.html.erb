@@ -6,10 +6,14 @@
   </div>
 <% end %>
 
-<p>
-  <b>Username:</b>
-  <%=h @user.username %>
-</p>
+<div class="profile_block">
+  <b><%= t(:username) %>:</b>
+  <%=h @user.username %> 
+  <% if current_user %>
+  <%= link_to "(" + t(:add_as_friend) + ")", friendships_path(:friend_id => @user), :method => :post unless @user == current_user || current_user.friendships.find_by_friend_id(@user) %> 
+  <% end %>
+</div>
+
 
 <p>
   <b>Email:</b>

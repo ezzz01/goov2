@@ -293,3 +293,13 @@ h3.ask_question {
 .user_avatar{
   min-width: 50px;
 }
+
+.pagination {
+  padding: 4px;
+}
+
+.pagination a {
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid #aaaaaa;
+}

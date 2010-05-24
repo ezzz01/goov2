@@ -1,26 +1,24 @@
-<h1>Listing users</h1>
+<h1><%= t(:users) %></h1>
+
+<div class="paginator">
+<%= will_paginate @users %>
+</div>
 
 <table>
-  <tr>
-    <th>Username</th>
-    <th>Blog url</th>
-    <th>Gender</th>
-    <th>Current country</th>
-  </tr>
 
-<% @users.each do |user| %>
-  <tr>
-    <td><%=h user.username %></td>
-    <td><%=h user.blog_url %></td>
-    <td><%=h user.gender %></td>
-    <td><%=h user.current_country %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% for user in @users %>
+    <tr height="50px">
+        <td><%= avatar_for(user) %></td> 
+        <td><%= link_to user.try(:username), user_profile_path(user.try(:username)) %></td>
+        <% if can? :destroy, user %> 
+        <td><%= link_to t(:destroy), user, :confirm => t(:are_you_sure), :method => :delete %></td>
+        <% end %>
+    </tr>
 <% end %>
-</table>
 
+</table>
 <br />
 
-<%= link_to 'New user', new_user_path %>
+<div class="paginator">
+<%= will_paginate @users %>
+</div>
