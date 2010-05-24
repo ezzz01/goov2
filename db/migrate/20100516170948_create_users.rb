@@ -13,7 +13,7 @@ class CreateUsers < ActiveRecord::Migration
       t.date :birthdate
       t.string :name
       t.string :surname
-      t.integer :current_country
+      t.integer :current_country_id
 
       t.timestamps
     end

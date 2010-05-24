@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   acts_as_authentic
   
   has_many :activities
+  belongs_to :current_country, :class_name => "Country"
   has_one :avatar, :dependent => :destroy
   has_many :userroles, :class_name => "UserRole"
   has_many :roles, :through => :userroles
@@ -53,14 +54,14 @@ class User < ActiveRecord::Base
                          :message => "neteisinga data"
 
   def name_surname
-    if !self.name.nil? && !self.surname.nil?
+    if !self.name.blank? && !self.surname.blank?
       self.name + " " + self.surname
-    elsif self.name.nil?
+    elsif self.name.blank?
       self.surname
-    elsif self.surname.nil?
+    elsif self.surname.blank?
       self.name
     else
-      " "
+      ""
     end
   end
 

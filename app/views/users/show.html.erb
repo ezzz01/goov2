@@ -14,41 +14,39 @@
   <% end %>
 </div>
 
+<% hidden_div_if(@user.try(:name_surname).blank?, :class => "profile_block") do %>
+  <b><%= t(:name_surname) %>:</b>
+  <%=h @user.name_surname %>
+<% end %>
 
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
+<% hidden_div_if(@user.birthdate.blank?, :class => "profile_block") do %>
+  <b><%= t(:birthdate) %>:</b>
+  <%=h @user.birthdate %> 
+<% end %>
 
-<p>
-  <b>Blog url:</b>
-  <%=h @user.blog_url %>
-</p>
+<% hidden_div_if(@user.gender.blank?, :class => "profile_block") do %>
+  <b><%= t(:gender) %>:</b>
+  <%=h @user.gender %> 
+<% end %>
 
-<p>
-  <b>Gender:</b>
-  <%=h @user.gender %>
-</p>
+<% if @user == current_user %>
+  <div class="profile_block">
+    <b><%= t(:email) %>:</b>
+    <%=h @user.email %>
+    <br />
+    <span class="smaller"><%= t(:email_hint) %></span>
+  </div>
+<% end %>
 
-<p>
-  <b>Birthdate:</b>
-  <%=h @user.birthdate %>
-</p>
+<% hidden_div_if(@user.blog_url.blank?, :class => "profile_block") do %>
+  <b><%= t(:external_blog) %>:</b>
+  <%= link_to @user.blog_url, blog_path(@user.username) %>
+<% end %>
 
-<p>
-  <b>Name:</b>
-  <%=h @user.name %>
-</p>
-
-<p>
-  <b>Surname:</b>
-  <%=h @user.surname %>
-</p>
-
-<p>
-  <b>Current country:</b>
-  <%=h @user.current_country %>
-</p>
+<% hidden_div_if(@user.current_country.blank?, :class => "profile_block") do %>
+  <b><%= t(:current_country) %>:</b>
+  <%=h @user.current_country.try(:title) %>
+<% end %>
 
 <%= link_to t(:back), users_path %>
 <span class="span_separator">|</span>

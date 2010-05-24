@@ -1,42 +1,54 @@
-<h1>Editing user</h1>
+<h1><%= t(:edit_user) %></h1>
+
 <%= error_messages_for :user, :avatar %>
 
 <% form_for(@user, :html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
-
   <p>
-    <%= f.label :username %><br />
+    <b><%= f.label :username, t(:username) %></b>
     <%= f.text_field :username %>
   </p>
+
   <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :blog_url %><br />
-    <%= f.text_field :blog_url %>
-  </p>
-  <p>
-    <b><%= f.label :gender, t(:gender) %></b>
-      <%= f.radio_button :gender, "Jis" %><%= t(:he) %>
-      <%= f.radio_button :gender, "Ji" %><%= t(:she) %>
-  </p>
-  <p>
-    <%= f.label :birthdate %><br />
-    <%= f.date_select :birthdate %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
+    <b><%= f.label :name, t(:name) %></b>
     <%= f.text_field :name %>
   </p>
+
   <p>
-    <%= f.label :surname %><br />
+    <b><%= f.label :surname, t(:surname) %></b>
     <%= f.text_field :surname %>
   </p>
+
+  <p>
+    <b><%= f.label :birthdate, t(:birthdate) %></b>
+    <%= date_select "user", :birthdate, 
+                      :start_year => User::START_YEAR,
+                      :end_year => Time.now.year,
+                      :include_blank => true,
+                      :order => [:day, :month, :year] %>
+  </p>
+
+ <p>
+    <b><%= f.label :gender, t(:gender) %></b>
+      <%= f.radio_button :gender, User::VALID_GENDERS[0] %><%= t(:he) %>
+      <%= f.radio_button :gender, User::VALID_GENDERS[1] %><%= t(:she) %>
+  </p>
+
+ <p>
+    <b><%= f.label :email, t(:email) %></b>
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+    <b><%= f.label :blog_url, t(:rss_source) %></b>
+    <span class="smaller"><%= t(:rss_cource_explanation) %></span><br />
+    <%= f.text_field :blog_url %>
+  </p>
+
   <p>
     <%= f.label :current_country %><br />
-    <%= f.text_field :current_country %>
+    <%= collection_select("user", :current_country_id, Country.all, :id, :title, {:include_blank => true} ) %>
   </p>
+
   <p>
     <b><%= f.label :avatar_file, t(:avatar) %></b>
     <%= file_field_tag :avatar_file %>
@@ -48,5 +60,6 @@
   </p>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to t(:back), users_path %>
+<span class="span_separator">|</span>
+<%= link_to t(:show), @user %> 

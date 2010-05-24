@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(:version => 20100523172413) do
     t.date     "birthdate"
     t.string   "name"
     t.string   "surname"
-    t.integer  "current_country"
+    t.integer  "current_country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
