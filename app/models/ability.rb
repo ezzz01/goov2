@@ -19,8 +19,8 @@ class Ability
         can :update_organizations, :all
         can :update_study_programs, :all
         can :update_fields, :all
-
-        can :create, [User, Friendship]
+        can :autocomplete_tag_list, :all
+        can :create, [User, Friendship, Question, Answer]
 
 #        if user.try(:username)
 #          can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
@@ -42,13 +42,13 @@ class Ability
 #            activity.user == user
 #        end
 
-#        can :destroy, Question do |question|
-#            question.try(:user) == user
-#        end
+         can [:update, :destroy], Question do |question|
+             question.try(:user) == user
+         end
 
-#        can :destroy, Answer do |answer|
-#            answer.try(:user) == user
-#        end
+         can :destroy, Answer do |answer|
+             answer.try(:user) == user
+         end
 
 #        can :destroy, Comment do |comment|
 #            comment.try(:user) == user || comment.try(:post).try(:user) == user

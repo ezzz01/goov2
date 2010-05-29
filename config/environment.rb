@@ -41,6 +41,10 @@ Rails::Initializer.run do |config|
    config.i18n.default_locale = :lt
 
    config.gem "authlogic"
+   DB_STRING_MAX_LENGTH = 255
+   DB_TEXT_MAX_LENGTH = 40000
+   HTML_TEXT_FIELD_SIZE = 25
+  
 end
 
 require File.join(File.dirname(__FILE__), '..', 'lib', 'arturaz', 'as_lt_words.rb')

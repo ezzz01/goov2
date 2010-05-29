@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100523172413) do
+ActiveRecord::Schema.define(:version => 20100526122130) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(:version => 20100523172413) do
     t.date     "to"
     t.boolean  "current"
     t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "answers", :force => true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,10 +64,32 @@ ActiveRecord::Schema.define(:version => 20100523172413) do
     t.datetime "updated_at"
   end
 
+  create_table "questions", :force => true do |t|
+    t.string   "body"
+    t.integer  "user_id"
+    t.string   "cached_tag_list"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
   end
 
   create_table "user_roles", :force => true do |t|
@@ -90,6 +120,15 @@ ActiveRecord::Schema.define(:version => 20100523172413) do
     t.string   "name"
     t.string   "surname"
     t.integer  "current_country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "voteable_id"
+    t.integer  "user_id"
+    t.string   "voteable_type"
+    t.integer  "vote"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

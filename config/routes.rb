@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :votes
+
+  map.resources :answers
+
+  map.resources :questions
+
   map.resources :roles
 
   map.resources :concepts
