@@ -1,0 +1,8 @@
+<div class="blog_post_footer">
+    <b><%= t(:number_of_answers) %>:</b>
+    <span id="comments_number_for_post_<%= question.id %>"><%=h question.answers.size %></span>
+      <span class="span_separator">|</span>
+      <span><%= link_to t(:view_answers), question_path(question) %></span> 
+</div>
+
+

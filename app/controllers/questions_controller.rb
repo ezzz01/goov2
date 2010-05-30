@@ -2,8 +2,13 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @title = t(:all_questions)
-    @questions = Question.all.paginate(:per_page => 20)
+    if(params[:tag])
+      @questions = Question.find_tagged_with(params[:tag], :order => "created_at DESC")
+      @questions= @questions.paginate(:per_page => 20)
+    else
+      @questions = Question.find(:all, :order => "created_at DESC").paginate(:per_page => 20)
+      @title = t(:all_questions)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +18,7 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @title = t(:question) + truncate(@question.title, :length => 50, :ommision => '...')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,6 +28,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @title = t(:new_question)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,6 +38,7 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    @title = t(:edit_question)
   end
 
   def create
@@ -75,7 +83,4 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def autocomplete_tag_list
-    render :layout => false
-  end
 end

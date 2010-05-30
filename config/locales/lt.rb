@@ -161,7 +161,10 @@
   :unable_to_add_friend => "Klaida pridedant draugą",
 
   #questions
+  :question => "Klausimas: ",
+  :new_question => "Naujas klausimas",
   :full_question => "Pilnas klausimas",
+  :edit_question => "Redaguoti klausimą",
   :all_questions => "Visi klausimai",
   :view_answers => "Peržiūrėti atsakymus",
   :number_of_answers => "Atsakymų",

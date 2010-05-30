@@ -303,3 +303,8 @@ h3.ask_question {
   padding: 2px;
   border: 1px solid #aaaaaa;
 }
+
+div.auto_complete {
+  padding: 0;
+  margin: 0;
+}

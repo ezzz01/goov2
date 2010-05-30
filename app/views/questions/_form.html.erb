@@ -1,0 +1,23 @@
+<% form_for(@question) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label t(:title) %>
+    <%= f.text_field :title, :size => 60 %>
+  </p>
+
+  <p>
+    <%= f.text_area :body, :rows => 30, :cols => 80 %>
+  </p>
+
+  <p>
+    <%= f.label :tag_list, t(:tags) %>
+    <%= text_field_with_auto_complete :question, :tag_list, { :size => 60 }, { :url => tags_path, :method => :get, :param_name => 'search', :tokens => ',', :min_chars => 2 } %>
+  </p>
+
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>
+
+

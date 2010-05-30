@@ -16,14 +16,17 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users
   map.resources :user_sessions
 
+  map.resources :tags
+
   map.register "register", :controller => "users", :action => "new"
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
-  map.blog 'user/:user/blog', :controller => 'posts', :action => 'index'
-  map.user_profile 'user/:user', :controller => 'users', :action => 'show'
+  map.blog 'user/:user/blog', :controller => "posts", :action => "index"
+  map.user_profile 'user/:user', :controller => "users", :action => "show"
+  map.questions_tag 'questions/tag/:tag', :controller => "questions", :action => "index"
 
   map.root :controller => "site" 
-
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

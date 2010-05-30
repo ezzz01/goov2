@@ -65,7 +65,8 @@ ActiveRecord::Schema.define(:version => 20100526122130) do
   end
 
   create_table "questions", :force => true do |t|
-    t.string   "body"
+    t.string   "title"
+    t.text     "body"
     t.integer  "user_id"
     t.string   "cached_tag_list"
     t.datetime "created_at"

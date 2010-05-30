@@ -1,5 +1,7 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  require 'string'
+
   def nav_link(text, controller, action="index")
     link_to_unless_current text, :id => nil, :controller => controller, :action => action
   end
@@ -39,6 +41,9 @@ module ApplicationHelper
   end
  
   def avatar_for(user, size = :large)
+    if user.nil?
+      image_tag("blank-cover-#{size}.png" ) and return
+    end
     if user.avatar
       avatar_image = user.avatar.public_filename(size)
         link_to image_tag(avatar_image), user_profile_path(user.try(:username)) 
@@ -53,5 +58,21 @@ module ApplicationHelper
     end
     content_tag("div", attributes, &block)
   end
+
+  def truncate(text, *args)
+    options = args.extract_options!
+    options.reverse_merge!(:length => 30, :omission => "...")
+    return text if text.num_chars <= options[:length]
+    len = options[:length] - options[:omission].as_utf8.num_chars
+    t = ''
+    text.split.collect do |word|
+      if t.num_chars + word.num_chars <= len
+        t << word + ' '
+      else 
+        return t.chop + options[:omission]
+      end
+    end
+  end
+
 
 end

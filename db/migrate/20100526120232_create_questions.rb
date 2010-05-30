@@ -1,7 +1,8 @@
 class CreateQuestions < ActiveRecord::Migration
   def self.up
     create_table :questions, :options => 'default charset=utf8' do |t|
-      t.string :body
+      t.string :title
+      t.text :body
       t.integer :user_id
       t.string :cached_tag_list
 
