@@ -1,0 +1,36 @@
+<div class="answer" id="answer_<%= answer.id %>">
+
+  <span id="votebutton_for_<%= answer.id %>">
+    <% if try(:current_user) %>
+      <%= render :partial => 'answers/vote_logic', :locals => {:forr_against => :forr, :answer => answer } %>
+    <% else %>
+      <%= image_tag("arrow_up.png", :alt => t(:log_in_to_vote), :title => t(:log_in_to_vote)) %>
+    <% end %>
+  </span>
+  <span id="votes_for_<%= answer.id %>"><%= answer.votes_for %></span>
+
+  <%= profile_for(answer.user) %>
+  <span class="post_date"><%= h answer.created_at.as_lt_words %></span>
+  <% if can? :destroy, answer %> 
+    <span class="delete_answer">
+      <%= link_to_remote "x", 
+            :url => answer_path(answer),
+            :method => :delete,
+            :confirm => t(:are_you_sure) %>
+    </span>
+  <% end %>
+  <div class="answer_body">
+    <%= sanitize answer.body %>
+  </div>
+
+  <span id="votebutton_against_<%= answer.id %>">
+    <% if try(:current_user) %>
+      <%= render :partial => 'answers/vote_logic', :locals => {:forr_against => :against, :answer => answer } %>
+    <% else %>
+      <%= image_tag("arrow_down.png", :alt => t(:log_in_to_vote), :title => t(:log_in_to_vote)) %>
+    <% end %>
+  </span>
+  <span id="votes_against_<%= answer.id %>"><%= answer.votes_against %></span>
+
+</div>
+

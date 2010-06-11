@@ -1,17 +1,12 @@
 class AnswersController < ApplicationController
-  # GET /answers
-  # GET /answers.xml
-  def index
-    @answers = Answer.all
+  load_and_authorize_resource
+  before_filter :load_question, :only => ["index", "new", "create"]
+  before_filter :find_answer, :only => ["vote_for", "vote_against", "unvote_for", "unvote_against"]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @answers }
-    end
+  def index
+    redirect_to question_path(@question)
   end
 
-  # GET /answers/1
-  # GET /answers/1.xml
   def show
     @answer = Answer.find(params[:id])
 
@@ -21,41 +16,30 @@ class AnswersController < ApplicationController
     end
   end
 
-  # GET /answers/new
-  # GET /answers/new.xml
   def new
-    @answer = Answer.new
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @answer }
+      format.js 
     end
   end
 
-  # GET /answers/1/edit
   def edit
     @answer = Answer.find(params[:id])
   end
 
-  # POST /answers
-  # POST /answers.xml
   def create
-    @answer = Answer.new(params[:answer])
-
-    respond_to do |format|
-      if @answer.save
-        flash[:notice] = 'Answer was successfully created.'
-        format.html { redirect_to(@answer) }
-        format.xml  { render :xml => @answer, :status => :created, :location => @answer }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @answer.errors, :status => :unprocessable_entity }
+      @answer = @question.answers.build(params[:answer])
+      @answer.user_id = (current_user.nil?)? nil : current_user.id 
+      respond_to do |format|
+        if @answer.duplicate? or @answer.save
+          format.html { redirect_to root_url }
+          format.js 
+        else
+          format.html { render :action => "new" }
+          format.js { render :nothing => true}
+        end
       end
-    end
   end
 
-  # PUT /answers/1
-  # PUT /answers/1.xml
   def update
     @answer = Answer.find(params[:id])
 
@@ -71,15 +55,75 @@ class AnswersController < ApplicationController
     end
   end
 
-  # DELETE /answers/1
-  # DELETE /answers/1.xml
   def destroy
     @answer = Answer.find(params[:id])
     @answer.destroy
 
     respond_to do |format|
-      format.html { redirect_to(answers_url) }
-      format.xml  { head :ok }
+      format.js
     end
   end
+ 
+  def vote_for
+    vote_old = Vote.find(:first, :conditions => [ "voteable_id = ? AND user_id = ?", @answer.id, current_user.id ])
+    @answer.votes.delete(vote_old) if vote_old
+    vote = Vote.new(:vote => 1, :user => try(:current_user))
+    @answer.votes << vote
+    if @answer.save!
+      rerender_vote_buttons(@answer)
+    end
+  end
+
+  def vote_against
+    vote_old = Vote.find(:first, :conditions => [ "voteable_id = ? AND user_id = ?", @answer.id, current_user.id ])
+    @answer.votes.delete(vote_old) if vote_old
+    vote = Vote.new(:vote => "-1", :user => try(:current_user))
+    @answer.votes << vote
+    if @answer.save!
+      rerender_vote_buttons(@answer)
+    end
+  end
+
+  def unvote_for
+    vote = Vote.find(:first, :conditions => [ "voteable_id = ? AND vote = ? AND user_id = ? ", @answer.id, 1, current_user.id ])
+    @answer.votes.delete(vote) if vote
+    if @answer.save!
+      rerender_vote_buttons(@answer)
+    end
+  end
+
+  def unvote_against
+    vote = Vote.find(:first, :conditions => [ "voteable_id = ? AND vote = ? AND user_id = ? ", @answer.id, "-1", current_user.id ])
+    @answer.votes.delete(vote) if vote
+    if @answer.save!
+      rerender_vote_buttons(@answer)
+    end
+  end
+
+  private
+
+  def load_question
+    @question = Question.find(params[:question_id])
+  end
+
+  def find_answer
+    @answer = Answer.find(params[:answer_id])
+  end
+
+  def rerender_vote_buttons(answer)
+     @question = answer.question
+     @sorted_answers = @question.sorted_answers
+
+     render :update do |page|
+        page.replace_html "votes_for_#{answer.id}", answer.votes_for 
+        page.replace_html "votes_against_#{answer.id}", answer.votes_against
+        page.replace_html "answers_for_question_#{@question.id}",
+              :partial => "answers/answer",
+              :collection => @sorted_answers, :locals => {:long => :long }
+        page.replace_html "votebutton_for_#{answer.id}", :partial => 'answers/vote_logic', :locals => {:forr_against => :forr, :answer => answer }
+        page.replace_html "votebutton_against_#{answer.id}", :partial => 'answers/vote_logic', :locals => {:forr_against => :against, :answer => answer }
+      end
+  end
+
+
 end

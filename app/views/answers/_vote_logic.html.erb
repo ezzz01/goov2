@@ -1,0 +1,18 @@
+<% if forr_against == :forr %> 
+
+  <% if current_user.voted_for?(answer) %>
+      <%= render :partial => 'answers/unvote_for', :locals => {:answer => answer } %>
+  <% else %>
+      <%= render :partial => 'answers/vote_for', :locals => {:answer => answer } %>
+  <% end %>
+
+<% elsif forr_against == :against %>
+
+  <% if current_user.voted_against?(answer) %>
+      <%= render :partial => 'answers/unvote_against', :locals => {:answer => answer } %>
+  <% else %>
+      <%= render :partial => 'answers/vote_against', :locals => {:answer => answer } %>
+  <% end %>
+
+<% end %>
+

@@ -1,18 +1,28 @@
-<p>
-  <b>Body:</b>
-  <%=h @question.body %>
-</p>
+<div id="main">
+  <div id="posts">
+    <%= render :partial => "questions/question_header", :locals => { :question => @question } %>
+    <%= render :partial => "questions/question_body", :locals => { :question => @question } %>
+    <div class="answers" id="answers_for_question_<%=@question.id %>">
+      <%= render :partial => "answers/answer", :collection => @question.sorted_answers %>
+    </div>
 
-<p>
-  <b>User:</b>
-  <%=h @question.user_id %>
-</p>
+    <div id="add_answer_link_for_question_<%= @question.id %>">
+      <%= link_to_remote t(:new_answer),
+        {:url => new_question_answer_path(@question.id), 
+        :method => :get},
+        :href => new_question_answer_path(@question.id)
+      %>
+    </div>
 
-<p>
-  <b>Cached tag list:</b>
-  <%=h @question.cached_tag_list %>
-</p>
+    <div class="comment_form" id="new_answer_form_for_question_<%= @question.id %>">
+    </div>
 
+  </div>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+ <%= link_to t(:back), questions_path %>
+
+</div>
+
+<div id="sidebar">
+</div>
+

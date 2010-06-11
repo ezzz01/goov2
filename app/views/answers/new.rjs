@@ -1,0 +1,8 @@
+page.hide "add_answer_link_for_question_#{@question.id}" 
+form_div = "new_answer_form_for_question_#{@question.id}"
+page.hide form_div
+page.replace_html form_div, 
+       :partial => "answers/new_answer",  
+       :locals => {:url => question_answers_path(@question), :label => t(:new_answer), :button_name => t(:send) }
+page.show "new_answer_form_for_question_#{@question.id}"
+page.visual_effect :blind_down, form_div

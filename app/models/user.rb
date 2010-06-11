@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  has_many :votes, :dependent => :nullify
 
   attr_accessor :remember_me
   attr_accessor :current_password
@@ -69,6 +70,18 @@ class User < ActiveRecord::Base
     self.password = nil
     self.password_confirmation = nil
     self.current_password = nil
+  end
+
+  def voted_for?(voteable)
+    0 < Vote.count(:all, :conditions => [ "user_id = ? AND vote = ? AND voteable_id = ?", self.id, 1, voteable.id ])
+  end
+
+  def voted_against?(voteable)
+    0 < Vote.count(:all, :conditions => [ "user_id = ? AND vote = ? AND voteable_id = ? ", self.id, "-1", voteable.id ])
+  end
+
+  def voted_on?(voteable)
+    0 < Vote.count(:all, :conditions => [ "user_id = ? AND voteable_id = ? ", self.id, voteable.id ])
   end
 
 

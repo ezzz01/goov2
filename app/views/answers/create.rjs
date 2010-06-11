@@ -1,0 +1,13 @@
+page.visual_effect :blind_up, "new_answer_form_for_question_#{@question.id}"
+page.show "add_answer_link_for_question_#{@question.id}"
+
+page << "if ($('answers_for_question_#{@question.id}')){"
+  page.replace_html "answers_for_question_#{@question.id}",  :partial => "answers/answer",
+                   :collection => @question.sorted_answers
+page << "}"
+
+page << "if ($('answers_number_for_question_#{@question.id}')){"
+  page.replace_html "answers_number_for_question_#{@question.id}", @question.answers.size
+page << "}"
+flash.discard
+

@@ -260,17 +260,19 @@ div.spacer {
   padding-bottom: 14px;
 }
 
-.answer_short {
-    margin: 4px;
-    padding-left: 4px;
-    border-top: 1px dashed;
-    color: #999999;
-}
-
 .answer {
     margin: 4px;
     padding-left: 4px;
-    border-top: 1px dashed;
+    border: 1px solid #aaaaaa;
+}
+
+div.answer_body {
+  padding-left: 30px;
+}
+
+span.delete_answer {
+  margin: 4px;
+  float: right;
 }
 
 h3.ask_question {
