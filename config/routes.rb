@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+
   map.resources :votes
 
   map.resources :answers
@@ -28,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.questions_tag 'questions/tag/:tag', :controller => "questions", :action => "index"
 
   map.root :controller => "site" 
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
