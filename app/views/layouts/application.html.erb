@@ -1,12 +1,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <title><%= @title %></title>
 <%= stylesheet_link_tag "site" %>
 <%= stylesheet_link_tag 'lightbox' %>
 <%= javascript_include_tag :defaults %>
 <%= javascript_include_tag 'lightbox' %>
+<%= fb_connect_javascript_tag %>
 
 <% if @include_post_form || @include_wiki_form  %>
   <%= javascript_include_tag 'jquery-1.3.2.min.js' %>
@@ -78,6 +79,10 @@ var pageTracker = _gat._getTracker("UA-15321033-1");
 pageTracker._trackPageview();
 } catch(err) {}</script>
 <% end %>
+  <%= javascript_tag "window.api_key = '#{Facebooker.api_key}';" %>
+  <%= javascript_tag "window.xd_receiver_location = '#{ENV['XD_RECEIVER_LOCATION']}';" %>
+  <%= javascript_tag "window.facebook_authenticate_location = '#{ENV['FACEBOOK_AUTHENTICATE_LOCATION']}';" %>
+  <%= javascript_include_tag 'facebook_require' %>
 </body>
 </html>
 

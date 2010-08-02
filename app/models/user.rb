@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   acts_as_authentic
   
+  after_create :register_user_to_fb
+
   has_many :activities
   belongs_to :current_country, :class_name => "Country"
   has_one :avatar, :dependent => :destroy
@@ -71,6 +73,56 @@ class User < ActiveRecord::Base
     self.password_confirmation = nil
     self.current_password = nil
   end
+
+#The Facebook registers user method is going to send the users email hash and our account id to Facebook
+#We need this so Facebook can find friends on our local application even if they have not connect through connect
+#We then use the email hash in the database to later identify a user from Facebook with a local user
+  def register_user_to_fb
+    users = {:email => email, :account_id => id}
+    Facebooker::User.register([users])
+    self.email_hash = Facebooker::User.hash_email(email)
+    save(false)
+  end
+ 
+#Take the data returned from facebook and create a new user from it.
+#We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
+#If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
+  def self.create_from_fb_connect(fb_user)
+    new_facebooker = User.new(:name => fb_user.first_name, :surname => fb_user.last_name, :username => fb_user.first_name+" "+fb_user.last_name, :password => "", :email => "")
+    new_facebooker.fb_user_id = fb_user.uid.to_i
+
+    #We need to save without validations
+    new_facebooker.save(false)
+  end
+ 
+#We are going to connect this user object with a facebook id. But only ever one account.
+  def link_fb_connect(fb_user_id)
+    unless fb_user_id.nil?
+      #check for existing account
+      existing_fb_user = User.find_by_fb_user_id(fb_user_id)
+   
+      #unlink the existing account
+      unless existing_fb_user.nil?
+        existing_fb_user.fb_user_id = nil
+        existing_fb_user.save(false)
+      end
+   
+      #link the new one
+      self.fb_user_id = fb_user_id
+      save(false)
+    end
+  end
+ 
+
+  def self.find_by_fb_user(fb_user)
+    User.find_by_fb_user_id(fb_user.uid) || User.find_by_email_hash(fb_user.email_hashes)
+  end
+
+  def facebook_user?
+    return !fb_user_id.nil? && fb_user_id > 0
+  end
+
+
 
   def voted_for?(voteable)
     0 < Vote.count(:all, :conditions => [ "user_id = ? AND vote = ? AND voteable_id = ?", self.id, 1, voteable.id ])

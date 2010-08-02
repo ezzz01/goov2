@@ -1,18 +1,19 @@
 <h2><%=t :login %></h2>
 
-<% form_for(@user_session) do |f| %>
-  <%= f.error_messages %>
-
+<div class="float_left standard_width">
   <fieldset>
     <legend><%=t :enter_your_details %></legend>
+
+<% form_for(@user_session) do |f| %>
+  <%= f.error_messages %>
     <label for="username"><%=t :username %></label>
       <div class="form_row">
-    <%= f.text_field :username, :size => User::USERNAME_SIZE, :maxlength => User::USERNAME_MAX_LENGTH%>
-    </div>
+        <%= f.text_field :username, :size => User::USERNAME_SIZE, :maxlength => User::USERNAME_MAX_LENGTH%>
+      </div>
 
     <label for="password"><%=t :password %></label>
     <div class="form_row">
-    <%= f.password_field :password, :size => User::PASSWORD_SIZE, :maxlength => User::PASSWORD_MAX_LENGTH %>
+      <%= f.password_field :password, :size => User::PASSWORD_SIZE, :maxlength => User::PASSWORD_MAX_LENGTH %>
     </div>
 
     <label for="remember_me"><%=t :remember_me %></label>
@@ -23,7 +24,15 @@
   <p>
     <%= f.submit t(:login) %>
   </p>
-   </fieldset>
-
 
 <% end %>
+   </fieldset>
+</div>
+
+<div class="float_right standard_width">
+    <fieldset>
+    <legend><%=t :or_login_with_Facebook %></legend>
+      <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+   </fieldset>
+</div>
+

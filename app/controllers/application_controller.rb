@@ -3,13 +3,23 @@
 
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  include AuthenticatedSystem
+
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  helper_method :current_user
+  before_filter :set_facebook_session
+  helper_method :facebook_session
+
+  rescue_from  Facebooker::Session::SessionExpired do
+    clear_facebook_session_information
+    clear_fb_cookies!    
+    reset_session
+    redirect_to root_url
+  end
 
   def param_posted? (symbol)
     request.post? and params[symbol]
@@ -36,17 +46,8 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
   end
 
-
-  private
-
-  def current_user_session   
-    return @current_user_session if defined?(@current_user_session)   
-    @current_user_session = UserSession.find   
-  end   
-  
-  def current_user   
-    @current_user = current_user_session && current_user_session.record   
-  end   
-
+  def verify_authenticity_token
+    super unless request_comes_from_facebook?
+  end
 
 end

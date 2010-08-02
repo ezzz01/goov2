@@ -20,6 +20,7 @@ class Ability
         can :update_study_programs, :all
         can :update_fields, :all
         can :autocomplete_tag_list, :all
+        can :link_user_accounts, :all
         can :create, [User, Friendship, Question, Answer]
 
 #        if user.try(:username)

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100526122130) do
+ActiveRecord::Schema.define(:version => 20100703170556) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -123,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20100526122130) do
     t.integer  "current_country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "fb_user_id",                       :default => 0
+    t.string   "email_hash",         :limit => 64
   end
 
   create_table "votes", :force => true do |t|

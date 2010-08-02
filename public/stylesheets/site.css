@@ -209,6 +209,10 @@ img {
   float: right;
 }
 
+.standard_width{
+ width: 400px;
+}
+
 .blog_post_header {
     background-color: #eaeaea;
     border: 1px solid #aaaaaa;

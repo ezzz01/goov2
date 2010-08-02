@@ -1,5 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.connect '/fb/:action', :controller => 'facebook'
+
   map.resources :votes
 
   map.resources :answers
@@ -16,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :activities
 
-  map.resources :users
+  map.resources :users, :collection => {:link_user_accounts => :get}
   map.resources :user_sessions
 
   map.resources :tags

@@ -1,8 +1,11 @@
 <h2><%=t :register %></h2>
-<%= error_messages_for 'user' %>
-<% form_for(@user) do |f| %>
+
+<div class="float_left standard_width">
+
   <fieldset>
     <legend><%=t :enter_your_details %></legend>
+<%= error_messages_for 'user' %>
+<% form_for(@user) do |f| %>
     <div class="form_row">
       <label for="username"><%=t :username %></label>
     <%= f.text_field :username, :size => User::USERNAME_SIZE, :maxlength => User::USERNAME_MAX_LENGTH%>
@@ -27,5 +30,17 @@
     <div class="form_row">
     <%= f.submit t(:register_button), :class => "submit" %>
     </div>
-  </fieldset>
+
 <% end %>
+
+  </fieldset>
+
+</div>
+
+<div class="float_right standard_width">
+    <fieldset>
+      <legend><%=t :or_login_with_Facebook %></legend>
+        <p><%= t(:facebook_explanation) %></p>
+        <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+   </fieldset>
+</div>

@@ -15,9 +15,14 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    @user_session = UserSession.find
-    @user_session.destroy
-        flash[:notice] = t(:logout_successful) 
-      redirect_to root_url 
+    session[:user_id] = nil
+    session[:facebook_session] = nil
+    session[:session_id] = nil
+    cookies[:auth_token] = nil
+    facebook_session = nil
+    @current_user = false 
+    flash[:notice] = t(:logout_successful) 
+    redirect_to root_url 
   end
+
 end
