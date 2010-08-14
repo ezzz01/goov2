@@ -1,0 +1,29 @@
+<h1><%= @blog_title ||= t(:blog_posts, :username => @user.username) %></h1>
+
+<div class="paginator">
+  <%= will_paginate @posts %>
+</div>
+
+<div id="main">
+
+  <%= render :partial => "posts/new_post_link" %>
+
+  <% @posts.each do |post| %>
+    <div id="blog_post_<%= post.id %>">
+      <%= render :partial => "posts/post_header", :locals => { :post => post } %>
+      <%= render :partial => "posts/post_body", :locals => { :post => post } %>
+      <%= render :partial => "posts/post_footer", :locals => { :post => post } %>
+    </div>
+  <% end %>
+
+  <%= render :partial => "posts/new_post_link" %>
+
+  <div class="paginator">
+    <%= will_paginate @posts %>
+  </div>
+
+</div>
+
+<div id="sidebar">
+  <%= render :partial => "posts/tag_cloud" %>
+</div>

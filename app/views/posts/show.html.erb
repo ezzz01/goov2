@@ -1,0 +1,25 @@
+<div id="posts">
+  <%= render :partial => "post_header", :locals => { :post => @post } %>
+  <%= render :partial => "post_body", :locals => { :post => @post } %>
+  <%= render :partial => "posts/post_footer", :locals => { :post => @post } %>
+
+  <div class="comments" id="comments_for_post_<%=@post.id %>">
+    <%= render :partial => "comments/comment", :collection => @post.comments.find(:all, :conditions => {:in_reply_to_id => nil}) %>
+  </div>
+
+  <div id="add_comment_link_for_post_<%= @post.id %>">
+    <%= link_to_remote t(:new_post_comment),
+      {:url => new_user_post_comment_path(@post.user_id, @post), 
+      :method => :get},
+      :href => new_user_post_comment_path(@post.user_id, @post)
+    %>
+  </div>
+
+  <div class="comment_form" id="new_comment_form_for_post_<%= @post.id %>">
+    <% if params[:mode] == "comment" %>
+      <%= render :partial => "comments/new_comment", :locals => {:url => user_post_comments_path(@post.user_id, @post), :label => t(:new_post_comment), :button_name => t(:create) }%>
+    <% end %>
+  </div>
+
+  <%= link_to t(:back), blog_path(@post.user.username) unless @post.user.nil? %>
+</div>

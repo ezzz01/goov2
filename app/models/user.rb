@@ -93,6 +93,11 @@ class User < ActiveRecord::Base
 
     #We need to save without validations
     new_facebooker.save(false)
+
+    #copy avatar from FB (rewrite current avatar in go-out.lt):
+    #TODO - let choose if rewrite current
+    avatar = Avatar.new(:user_id => new_facebooker.id, :thumbnail => fb_user.pic_square, :fb_avatar => true)
+    avatar.save(false)
   end
  
 #We are going to connect this user object with a facebook id. But only ever one account.

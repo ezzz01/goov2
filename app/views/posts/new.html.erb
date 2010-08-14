@@ -1,0 +1,5 @@
+<h1><%= t(:add_new_post) %></h1>
+
+<%= render :partial => "form", :locals => {:button_name => t(:send), :url_path => user_posts_path } %>
+
+<%= link_to t(:back), blog_path(current_user.username) %>

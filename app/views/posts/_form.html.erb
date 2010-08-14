@@ -1,0 +1,18 @@
+<% form_for(@post, :url => url_path) do |f| %>
+  <%= f.error_messages %>
+  <div>
+    <%= f.label :title, t(:title)  %>
+    <%= f.text_field :title, :size => 60 %>
+  </div>
+  <div>
+    <%= f.label :tag_list, t(:tag_list) %>
+    <%= f.text_field :tag_list, :size => 60 %>
+  </div>
+  <div>
+  <%= f.label :body, t(:entry) %>
+  <%= f.text_area :body, :rows => 30, :cols =>80 %>
+  </div>
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>

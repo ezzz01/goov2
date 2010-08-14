@@ -1,0 +1,4 @@
+<b><%= t(:tags) %>:</b> 
+<% post.tag_list.each do |tag| %>
+  <%= link_to tag, user_tag_posts_url(post.user, tag) %>
+<% end %>

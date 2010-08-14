@@ -30,6 +30,8 @@ ActionController::Routing::Routes.draw do |map|
   map.user_profile 'user/:user', :controller => "users", :action => "show"
   map.questions_tag 'questions/tag/:tag', :controller => "questions", :action => "index"
 
+  map.zeitgeist "zeitgeist/:tag", :controller => "zeitgeist", :action => "index"
+
   map.root :controller => "site" 
 
   # The priority is based upon order of creation: first created -> highest priority.

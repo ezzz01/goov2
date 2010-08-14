@@ -1,0 +1,6 @@
+<% if can? :update, @user %>
+  <div class="new_post_link">
+    <%= link_to t(:add_new_post), new_user_post_path(@user) %>
+  </div>
+<% end %>
+

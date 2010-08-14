@@ -1,0 +1,9 @@
+<div class="blog_post_footer">
+    <b><%= t(:comments) %>:</b>
+    <span id="comments_number_for_post_<%= post.id %>"><%=h post.comments.size %></span>
+    <% unless params[:mode] == "comment" %>
+      <span class="span_separator">|</span>
+      <span><%= post_link(post, "comment") %></span> 
+    <% end%>
+</div>
+

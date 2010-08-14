@@ -1,0 +1,9 @@
+<%= @feed %>
+<h3><a href='<%= @link %>'><%= @title %>:</a></h3>
+<% @items.each do |item| %>
+  <strong>
+    <a href='<%= item.link %>'> <%= item.title %></a>
+  </strong> - <small>(<%= item.date.strftime('%m/%d/%Y') %>)</small>
+    <%= item.description %>
+<% end %>
+

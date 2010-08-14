@@ -40,13 +40,17 @@ module ApplicationHelper
     end
   end
  
-  def avatar_for(user, size = :large)
+  def avatar_for(user, size = :small)
     if user.nil?
       image_tag("blank-cover-#{size}.png" ) and return
     end
     if user.avatar
-      avatar_image = user.avatar.public_filename(size)
-        link_to image_tag(avatar_image), user_profile_path(user.try(:username)) 
+      if user.avatar.fb_avatar == true
+        avatar_image = user.avatar.thumbnail 
+      else
+        avatar_image = user.avatar.public_filename(size)
+      end 
+      link_to image_tag(avatar_image), user_profile_path(user.try(:username)) 
     else
       image_tag("blank-cover-#{size}.png" )
     end
@@ -71,6 +75,17 @@ module ApplicationHelper
       else 
         return t.chop + options[:omission]
       end
+    end
+  end
+
+  def tag_cloud(tags, classes)
+    return if tags.empty?
+    
+    max_count = tags.sort_by(&:count).last.count.to_f
+    
+    tags.each do |tag|
+      index = ((tag.count / max_count) * (classes.size - 1)).round
+      yield tag, classes[index]
     end
   end
 

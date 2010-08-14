@@ -1,0 +1,21 @@
+<div class="paginator">
+  <%= will_paginate @posts %>
+</div>
+
+<div id="main">
+<% for post in @posts %>
+  <%= render :partial => "posts/post_header", :locals => { :post => post } %>
+  <%= render :partial => "posts/post_body", :locals => { :post => post } %>
+  <%= render :partial => "posts/post_footer", :locals => { :post => post } %>
+<% end %>
+
+  <div class="paginator">
+    <%= will_paginate @posts %>
+  </div>
+
+</div>
+
+<div id="sidebar">
+  <%= render :partial => "posts/tag_cloud" %>
+</div>
+

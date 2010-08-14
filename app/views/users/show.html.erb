@@ -1,10 +1,8 @@
 <div class="spacer"></div>
 
-<% unless @user.avatar.nil? %>
-  <div class="profile_block">
-    <%= avatar_for(@user, "") %>
-  </div>
-<% end %>
+<div class="profile_block">
+  <%= avatar_for(@user, "") %>
+</div>
 
 <div class="profile_block">
   <b><%= t(:username) %>:</b>

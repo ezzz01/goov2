@@ -1,0 +1,2 @@
+page.visual_effect :highlight, "blog_post_#{@post.id}", :duration => 2
+page.visual_effect :toggle_blind, "blog_post_#{@post.id}", :duration => 2

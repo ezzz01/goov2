@@ -1,0 +1,23 @@
+<div class="blog_post_header">
+  <% if can? :update, post %>
+    <div style="margin: 5px; float:right">
+      <%= link_to t(:edit), edit_user_post_path(post.user_id, post), :title => t(:will_be_edited_on_system) %>
+      <%= link_to_remote t(:delete), :url => {:controller => "posts", :action => "mark_as_deleted", :post_id => post.id}, :title => t(:will_be_deleted_on_system), :confirm => t(:are_you_sure) + t(:will_be_deleted_on_system), :method => :put %>
+    </div>
+  <% end %>
+  <div>
+    <span class="avatar"><%= avatar_for(post.user) %></span>
+    <br />
+    <%= profile_for(post.try(:user)) %> 
+  </div>
+  <div>
+  <span class="post_date"><%= l post.published, :format => :long %></span>
+    <% if post.from_url %>
+      <%=link_to image_tag('feed-icon-14x14.png', :alt=>"(t:original_source)"), post.from_url, :target => '_blank' %>
+    <% end %>
+    <span class="post_title"><%= post_link(post) %></span>
+    <% unless post.tag_list.size == 0 %>
+      <div> <%= render :partial => "posts/tag_list", :locals => {:post => post} %> </div>
+    <% end %>
+  </div>
+</div>

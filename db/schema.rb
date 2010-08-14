@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100703170556) do
+ActiveRecord::Schema.define(:version => 20100814153104) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20100703170556) do
     t.string   "thumbnail"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "fb_avatar",    :default => false
   end
 
   create_table "concepts", :force => true do |t|
@@ -62,6 +63,19 @@ ActiveRecord::Schema.define(:version => 20100703170556) do
     t.integer  "friend_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "cached_tag_list"
+    t.string   "guid"
+    t.string   "url"
+    t.string   "from_url"
+    t.boolean  "deleted",         :default => false
   end
 
   create_table "questions", :force => true do |t|
