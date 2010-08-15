@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :activities
   belongs_to :current_country, :class_name => "Country"
+  has_many :posts, :order => "created_at DESC"
   has_one :avatar, :dependent => :destroy
   has_many :userroles, :class_name => "UserRole"
   has_many :roles, :through => :userroles
@@ -88,7 +89,7 @@ class User < ActiveRecord::Base
 #We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
 #If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
   def self.create_from_fb_connect(fb_user)
-    new_facebooker = User.new(:name => fb_user.first_name, :surname => fb_user.last_name, :username => fb_user.first_name+" "+fb_user.last_name, :password => "", :email => "")
+    new_facebooker = User.new(:name => fb_user.first_name, :surname => fb_user.last_name, :username => fb_user.first_name+"_"+fb_user.last_name, :password => "", :email => "")
     new_facebooker.fb_user_id = fb_user.uid.to_i
 
     #We need to save without validations

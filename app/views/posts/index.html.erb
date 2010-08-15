@@ -16,7 +16,9 @@
     </div>
   <% end %>
 
-  <%= render :partial => "posts/new_post_link" %>
+  <% hidden_div_if(@posts.empty?, :class => "profile_block") do %>
+    <%= render :partial => "posts/new_post_link" %>
+  <% end %>
 
   <div class="paginator">
     <%= will_paginate @posts %>

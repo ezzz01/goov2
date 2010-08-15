@@ -1,0 +1,23 @@
+if @parent_comment
+    page.hide "new_comment_form_for_post_#{@post.id}"
+    page.hide "add_comment_link_for_comment_#{@parent_comment}" 
+    form_div = "new_reply_form_for_comment_#{@parent_comment}"
+    page.hide form_div
+    page.replace_html form_div, 
+       :partial => "new_comment",  
+       :locals => {:url => user_post_comments_path(@post.user_id, @post), :label => t(:new_comment_reply), :button_name => t(:send)}
+    page.show "new_reply_form_for_comment_#{@parent_comment}"
+    page.visual_effect :blind_down, form_div
+else
+
+    page.hide "add_comment_link_for_post_#{@post.id}" 
+    form_div = "new_comment_form_for_post_#{@post.id}"
+    page.hide form_div
+    page.replace_html form_div, 
+       :partial => "new_comment",  
+       :locals => {:url => user_post_comments_path(@post.user_id, @post), :label => t(:new_post_comment), :button_name => t(:send)}
+    page.show "new_comment_form_for_post_#{@post.id}"
+    page.visual_effect :blind_down, form_div
+
+end
+

@@ -1,0 +1,26 @@
+<div class="comment" id="comment_<%= comment.id %>">
+ <%= avatar_for(comment.try(:user)) %>
+ <%= profile_for(comment.user) %>
+<span class="post_date"><%= h comment.created_at.as_lt_words %></span>
+<% if can? :destroy, comment %>
+  <span class="edit_link" style="float: right">
+    <%= link_to_remote t(:delete), 
+      :url => user_post_comment_path(comment.post.user_id, comment.post, comment),
+      :method => :delete,
+      :confirm => t(:are_you_sure) %>
+  </span>
+<% end %>
+<p><%= sanitize comment.body %></p>    
+<div id="add_comment_link_for_comment_<%= comment.id %>">
+  <%= link_to_remote t(:new_comment_reply),
+    { :url => new_user_post_comment_comment_path(comment.post.user, comment.post, comment), 
+    :method => :get},
+    :href => new_user_post_comment_comment_path(comment.post.user, comment.post, comment)
+  %>
+</div>
+<div id="new_reply_form_for_comment_<%= comment.id %>"></div>
+<div id="replies" style="margin-left: 15px;">
+   <%= render :partial => "comments/comment", :collection => comment.replies(:order => :created_at) %>
+</div>
+</div>
+

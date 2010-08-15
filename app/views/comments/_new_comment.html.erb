@@ -1,0 +1,21 @@
+<% remote_form_for(@comment, :url => (url.nil?) ? user_post_comment_path : url) do |f| %>
+  <span class="bolder">
+    <%= f.label :body, label %>
+  </span>
+  <%= f.text_area :body, :cols => 60 %>
+  <%= f.hidden_field(:in_reply_to_id, :value => @parent_comment) %>
+  <p>
+  <%= f.submit button_name %> 
+  <%= button_to_function t(:cancel) do |page|
+        if @parent_comment
+          page.visual_effect :blind_up, "new_reply_form_for_comment_#{@parent_comment}"
+        else
+          page.visual_effect :blind_up, "new_comment_form_for_post_#{@post.id}"
+        end
+#       page.show "add_comment_link_for_post_#{@post.id}"
+      end
+  %>
+  </p>
+<% end %>
+
+

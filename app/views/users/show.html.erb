@@ -41,6 +41,11 @@
   <%= link_to @user.blog_url, blog_path(@user.username) %>
 <% end %>
 
+<div class="profile_block">
+  <b><%= t(:goout_blog) %>:</b>
+  <%= link_to blog_path(@user.username), blog_path(@user.username) %>
+</div>
+
 <% hidden_div_if(@user.current_country.blank?, :class => "profile_block") do %>
   <b><%= t(:current_country) %>:</b>
   <%=h @user.current_country.try(:title) %>

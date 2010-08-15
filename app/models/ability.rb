@@ -21,23 +21,25 @@ class Ability
         can :update_fields, :all
         can :autocomplete_tag_list, :all
         can :link_user_accounts, :all
-        can :create, [User, Friendship, Question, Answer]
+        can :create, [ Answer, Comment, Friendship, Question, User ]
 
-#        if user.try(:username)
-#          can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
-#        end
+        if user.try(:username)
+          #can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
+          can :create, [Post]
+        end
 
-#        if user.try(:username)
-#          can :update, [ ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Concept, Revision]
-#        end
-
+        if user.try(:username)
+         # can :update, [ ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Concept, Revision]
+          can :update, [Post]
+        end
+ 
         can [:update, :destroy], User do |edit_user|
           edit_user == user
         end
 
-#        can [:update, :destroy], Post do |post|
-#            post.try(:user) == user
-#        end
+         can [:update, :destroy], Post do |post|
+             post.try(:user) == user
+         end
 
 #        can [:update, :destroy], Activity do |activity|
 #            activity.user == user
@@ -51,9 +53,9 @@ class Ability
              answer.try(:user) == user
          end
 
-#        can :destroy, Comment do |comment|
-#            comment.try(:user) == user || comment.try(:post).try(:user) == user
-#        end
+         can :destroy, Comment do |comment|
+             comment.try(:user) == user || comment.try(:post).try(:user) == user
+         end
 
          can :destroy, Friendship do |friendship|
              friendship.try(:user) == user

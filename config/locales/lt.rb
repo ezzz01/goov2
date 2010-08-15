@@ -75,6 +75,7 @@
   :login => "Prisijungti",
   :connect_with_facebook => "Prisijungti per Facebook",
   :facebook_explanation => "Jeigu nenorite registruotis go-out.lt, bet naudojate Facebook, galite prisijungti naudojant Facebook duomenis.<br /><br />Atsidariusiame lange suteikite go-out.lt leidimą iš Facebook gauti Jūsų duomenis: vardą, pavardę, šalį.<br /><br />Savo duomenis iš go-out.lt galėsite 'atsiimti', Facebook nustatymuose pažymėję, kad nebenorite naudoti go-out.lt",
+  :facebook_login_explanation => "Jeigu jau susikūrėte go-out.lt vartotoją, bet nenorite kiekvieną kartą įvedinėti prisijungimo duomenų, spauskite žemiau esantį mygtuką ir susiekite turimą go-out.lt vartotoją su savo Facebook vartotoju ir kitą kartą prisijungsite vienu paspaudimu.",
   :logout => "Atsijungti",
   :no_such_user => "Tokio vartotojo nėra!",
   :register_button => "Registruotis",

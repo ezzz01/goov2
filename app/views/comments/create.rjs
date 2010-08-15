@@ -1,0 +1,10 @@
+page.visual_effect :blind_up, "new_comment_form_for_post_#{@post.id}"
+page.replace_html "comments_for_post_#{@post.id}",
+                :partial => "comment",
+                :locals => {:button_name => t(:send)},
+                :collection => @post.comments.find(:all, :conditions => {:in_reply_to_id => nil})
+page.replace_html "comments_number_for_post_#{@post.id}", @post.comments.size
+page.show "add_comment_link_for_post_#{@post.id}"
+page.visual_effect :highlight, "comment_#{@comment.id}", :duration => 2
+flash.discard
+

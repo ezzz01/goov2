@@ -18,7 +18,17 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :activities
 
-  map.resources :users, :collection => {:link_user_accounts => :get}
+  map.resources :users, :collection => {:link_user_accounts => :get} do |user|
+    user.resources :tags do |tag|
+      tag.resources :posts
+    end
+    user.resources :posts do |post|
+      post.resources :comments do |comment|
+        comment.resources :comments, :as => "replies"
+      end
+    end
+  end
+
   map.resources :user_sessions
 
   map.resources :tags
@@ -27,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
   map.blog 'user/:user/blog', :controller => "posts", :action => "index"
+  map.post 'user/:user/blog/:id', :controller => 'posts', :action => 'show', :id => ''
   map.user_profile 'user/:user', :controller => "users", :action => "show"
   map.questions_tag 'questions/tag/:tag', :controller => "questions", :action => "index"
 
