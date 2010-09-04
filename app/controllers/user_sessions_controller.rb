@@ -23,7 +23,6 @@ class UserSessionsController < ApplicationController
     facebook_session = nil
     @current_user = false 
     flash[:notice] = t(:logout_successful) 
-    puts "sessss" + session.inspect
     redirect_to root_url 
   end
 

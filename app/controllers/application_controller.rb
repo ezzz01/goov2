@@ -56,13 +56,10 @@ class ApplicationController < ActionController::Base
 
   # Called from #current_user.  First attempt to login by the user id stored in the session.
   def login_from_session
-    puts "tadas: try login from session"
     self.current_user = User.find_by_id(session[:user_id]) if session[:user_id]
   end
 
   def login_from_fb
-    puts "session: " + session[:logout].inspect
-    puts "tadas: try login from facebook"
     if facebook_session && session[:logout] != true
       self.current_user = User.find_by_fb_user(facebook_session.user)
     end
