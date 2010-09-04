@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   acts_as_authentic do |c|
+    c.require_password_confirmation = false
+    c.validate_password_field = false
 #     c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
   end 
   

@@ -66,7 +66,8 @@
       <%= nav_link t(:login), login_path %>
       <%= nav_link t(:do_register), register_path %> 
   <% end -%>
-  <% unless defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id == facebook_session.user) %>
+
+  <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
       <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
   <% end %>
 </span>
