@@ -101,10 +101,11 @@ class UsersController < ApplicationController
   end
 
   def link_user_accounts
+    session[:logout] = nil
     if self.current_user.nil?
       user = User.find_by_fb_user(facebook_session.user)
       if user
-        return
+        redirect_to root_url and return 
       end
       #register with fb
       User.create_from_fb_connect(facebook_session.user)

@@ -8,6 +8,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
       if @user_session.save
+        session[:user_id] = User.find_by_username(@user_session.username).id
         flash[:notice] = t(:login_successful) 
         redirect_to root_url
       else

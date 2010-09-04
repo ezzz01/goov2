@@ -28,12 +28,3 @@
 <% end %>
    </fieldset>
 </div>
-
-<div class="float_right standard_width">
-    <fieldset>
-    <legend><%=t :or_login_with_Facebook %></legend>
-        <p><%= t(:facebook_login_explanation) %></p>
-      <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
-   </fieldset>
-</div>
-
