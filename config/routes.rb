@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
     end
   end
 
-  map.resources :user_sessions
+  map.resource :user_session
 
   map.resources :tags
 

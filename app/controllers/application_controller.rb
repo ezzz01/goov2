@@ -3,17 +3,19 @@
 
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  include AuthenticatedSystem
 
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  filter_parameter_logging :fb_sig_friends, :password, :password_confirmation
 
   before_filter :set_facebook_session
-  helper_method :facebook_session
+  helper_method :facebook_session, :current_user, :facebook_user
 
+  before_filter :current_user
+
+ 
   rescue_from  Facebooker::Session::SessionExpired do
     clear_facebook_session_information
     clear_fb_cookies!    
@@ -46,8 +48,33 @@ class ApplicationController < ActionController::Base
       redirect_to root_url
   end
 
-  def verify_authenticity_token
-    super unless request_comes_from_facebook?
+  def current_user
+    @current_user ||= (login_from_session || login_from_fb) unless @current_user == false
   end
+
+  protected
+
+  # Called from #current_user.  First attempt to login by the user id stored in the session.
+  def login_from_session
+    puts "tadas: try login from session"
+    self.current_user = User.find_by_id(session[:user_id]) if session[:user_id]
+  end
+
+  def login_from_fb
+    puts "session: " + session[:logout].inspect
+    puts "tadas: try login from facebook"
+    if facebook_session && session[:logout] != true
+      self.current_user = User.find_by_fb_user(facebook_session.user)
+    end
+  end
+
+  # Store the given user id in the session.
+  def current_user=(new_user)
+    session[:user_id] = new_user ? new_user.id : nil
+    @current_user = new_user || false
+  end
+
+
+
 
 end

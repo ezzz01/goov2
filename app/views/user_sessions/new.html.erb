@@ -4,7 +4,7 @@
   <fieldset>
     <legend><%=t :enter_your_details %></legend>
 
-<% form_for(@user_session) do |f| %>
+<% form_for @user_session, :url => user_session_path do |f| %>
   <%= f.error_messages %>
     <label for="username"><%=t :username %></label>
       <div class="form_row">

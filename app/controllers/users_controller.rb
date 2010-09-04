@@ -50,6 +50,7 @@ class UsersController < ApplicationController
         @user = User.new(params[:user])
         if @user.save
           flash[:notice] = t(:registration_successful) 
+          session[:user_id] = @user.id
           format.html { redirect_to user_profile_path(@user.try(:username)) }
         else 
           @user.clear_password!
@@ -61,7 +62,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+  #  @user = @current_user # makes our views "cleaner" and more consistent
     @avatar = Avatar.new(:uploaded_data => params[:avatar_file])
 
     respond_to do |format|
@@ -101,6 +102,10 @@ class UsersController < ApplicationController
 
   def link_user_accounts
     if self.current_user.nil?
+      user = User.find_by_fb_user(facebook_session.user)
+      if user
+        return
+      end
       #register with fb
       User.create_from_fb_connect(facebook_session.user)
     else

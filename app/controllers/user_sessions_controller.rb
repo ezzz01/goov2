@@ -2,6 +2,7 @@ class UserSessionsController < ApplicationController
   def new
     @title = t(:login)
     @user_session = UserSession.new
+    session[:logout] = nil 
   end
 
   def create
@@ -15,13 +16,14 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
+    session[:logout] = true 
     session[:user_id] = nil
     session[:facebook_session] = nil
     session[:session_id] = nil
-    cookies[:auth_token] = nil
     facebook_session = nil
     @current_user = false 
     flash[:notice] = t(:logout_successful) 
+    puts "sessss" + session.inspect
     redirect_to root_url 
   end
 

@@ -7,7 +7,6 @@ class FacebookController < ApplicationController
   end
 
  def connect
-    puts "tadas: user connected"
     begin
       secure_with_token!
       session[:facebook_session] = @facebook_session
@@ -46,7 +45,6 @@ class FacebookController < ApplicationController
 
 
   def post_authorize
-    puts "tadas: user authorized"
     if linked_account_ids = params[:fb_sig_linked_account_ids].to_s.gsub(/\[|\]/,'').split(',')
       linked_account_ids.each do |user_id|
         if user = User.find_by_id(user_id)
@@ -59,7 +57,6 @@ class FacebookController < ApplicationController
   end
 
   def post_remove
-    puts "tadas: application removed"
     render :nothing => true
   end
 

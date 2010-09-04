@@ -2,12 +2,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 <title><%= @title %></title>
 <%= stylesheet_link_tag "site" %>
 <%= stylesheet_link_tag 'lightbox' %>
 <%= javascript_include_tag :defaults %>
 <%= javascript_include_tag 'lightbox' %>
 <%= fb_connect_javascript_tag %>
+
+ <% init_fb_connect("XFBML","Api", :app_settings => @app_settings) do %>
+      <%= yield :fb_connect %>
+      <%= fb_user_action(@user_action_to_publish) if @user_action_to_publish %>
+    <% end %>
 
 <% if @include_post_form || @include_wiki_form  %>
   <%= javascript_include_tag 'jquery-1.3.2.min.js' %>
@@ -46,13 +52,14 @@
 <div style="max-width: 1200px">
   <%= nav_link t(:start_page), "site" %>
   <%= nav_link t(:zeitgeist), "zeitgeist" %>
+  <%= nav_link t(:questions), "questions" %>
   <%= nav_link t(:users), "users" %>
   <%= nav_link t(:wiki), "concepts", "index"  %>
   <%= nav_link t(:about), "site", "about"  %>
   <%= nav_link t(:project_blog), "site", "blog"  %>
   <%= nav_link t(:help), "site", "help" %> 
   <span style="float:right">
-  <% if current_user -%>
+  <% if @current_user -%>
       <%= link_to_unless_current profile_for(current_user) %>
       <%= nav_link t(:logout), logout_path %>
   <% else -%>
@@ -68,6 +75,7 @@
         <% end -%>
 <%= yield %>
 </div>
+
 <% if ENV["RAILS_ENV"] == "production" %>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ?  "https://ssl." : "http://www.");

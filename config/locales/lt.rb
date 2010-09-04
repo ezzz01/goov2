@@ -10,6 +10,7 @@
   :blogs => "Dienoraščiai",
   :help => "Pagalba",
   :about => "Apie projektą",
+  :questions => "Klausimai",
   :project_blog => "Projekto blogas",
   :countries => "Šalys",
   :title => "Pavadinimas",

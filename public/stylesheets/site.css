@@ -266,12 +266,12 @@ div.spacer {
 
 .answer {
     margin: 4px;
-    padding-left: 4px;
+    padding: 4px;
     border: 1px solid #aaaaaa;
 }
 
 div.answer_body {
-  padding-left: 30px;
+  padding-left: 100px;
 }
 
 span.delete_answer {
@@ -313,4 +313,16 @@ h3.ask_question {
 div.auto_complete {
   padding: 0;
   margin: 0;
+}
+
+.answer_header {
+  display: inline;
+}
+
+.vote_button {
+  display: inline;
+}
+
+.vote_buttons {
+  display: inline;
 }

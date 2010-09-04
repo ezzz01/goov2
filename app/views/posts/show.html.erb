@@ -7,6 +7,12 @@
     <%= render :partial => "comments/comment", :collection => @post.comments.find(:all, :conditions => {:in_reply_to_id => nil}) %>
   </div>
 
+  <% if params[:mode] != "comment" %>
+    <div class="fbcomments">
+      <fb:comments numposts="10" simple="true"></fb:comments>
+    </div>
+  <% end %>
+
   <div id="add_comment_link_for_post_<%= @post.id %>">
     <%= link_to_remote t(:new_post_comment),
       {:url => new_user_post_comment_path(@post.user_id, @post), 

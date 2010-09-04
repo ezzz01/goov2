@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do |c|
+#     c.my_config_option = my_value # for available options see documentation in: Authlogic::ActsAsAuthentic
+  end 
   
   after_create :register_user_to_fb
 
@@ -36,18 +38,17 @@ class User < ActiveRecord::Base
   START_YEAR = 1950
   VALID_DATES = DateTime.new(START_YEAR)..DateTime.now
 
-  validates_confirmation_of :password, :unless => :updating_user
-  validates_length_of     :username, :within => USERNAME_RANGE
-  validates_length_of     :password, :within => PASSWORD_RANGE, :unless => :updating_user
-  validates_length_of     :email,   :maximum => EMAIL_MAX_LENGTH 
-  validates_length_of     :blog_url, :maximum => BLOG_MAX_LENGTH, :allow_nil => true 
+ validates_confirmation_of :password, :unless => :updating_user
+ validates_length_of     :username, :within => USERNAME_RANGE
+ validates_length_of     :password, :within => PASSWORD_RANGE, :unless => :updating_user
+ validates_length_of     :email,   :maximum => EMAIL_MAX_LENGTH 
+ validates_length_of     :blog_url, :maximum => BLOG_MAX_LENGTH, :allow_nil => true 
   validates_format_of :email,
                       :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i,
                       :message => I18n.t(:must_be_valid) 
   validates_format_of :username,
                       :with => /^[A-Z0-9_-]*$/i,
                       :message => I18n.t(:username_error)
-
   validates_inclusion_of :gender, 
                          :in => VALID_GENDERS,
                          :allow_nil => true,
