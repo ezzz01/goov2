@@ -4,5 +4,6 @@ doc/api
 doc/app
 *.sw?
 public/avatars/**/*
+vendor/plugins/tunnlr_connector
 tunnlr.yml
 facebooker.yml
