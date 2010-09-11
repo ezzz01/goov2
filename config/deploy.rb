@@ -26,6 +26,7 @@ before "deploy:start", "environment:production"
 before "deploy:restart", "db:symlink" 
 before "deploy:migrate", "db:symlink" 
 after "deploy:symlink", "customs:symlink"
+after "deploy:symlink", "customs:facebooker"
 after "deploy", "deploy:cleanup"
 
 namespace :environment do
@@ -34,11 +35,16 @@ namespace :environment do
   end
 end
 
-namespace(:customs) do
+namespace :customs do
  task :symlink, :roles => :app do
     run <<-CMD
       ln -nfs #{shared_path}/avatars #{release_path}/public/avatars
     CMD
+  end
+
+  task :facebooker, :roles => :app do
+    desc "Make symlink for facebooker yaml" 
+      run "ln -nfs ~/.ssh/facebooker.yml #{release_path}/config/facebooker.yml"
   end
 end
 
@@ -57,9 +63,5 @@ namespace :db do
   desc "Make symlink for database yaml" 
   task :symlink do
     run "ln -nfs ~/.ssh/database.yml #{release_path}/config/database.yml"
-  end
-  desc "Make symlink for facebooker yaml" 
-  task :symlink do
-    run "ln -nfs ~/.ssh/facebooker.yml #{release_path}/config/facebooker.yml"
   end
 end
