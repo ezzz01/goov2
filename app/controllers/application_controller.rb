@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
     @current_user ||= (login_from_session || login_from_fb) unless @current_user == false
   end
 
+  def verify_authenticity_token 
+    super unless request_comes_from_facebook? 
+  end
+
   protected
 
   # Called from #current_user.  First attempt to login by the user id stored in the session.
