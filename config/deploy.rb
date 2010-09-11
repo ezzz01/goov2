@@ -58,4 +58,8 @@ namespace :db do
   task :symlink do
     run "ln -nfs ~/.ssh/database.yml #{release_path}/config/database.yml"
   end
+  desc "Make symlink for facebooker yaml" 
+  task :symlink do
+    run "ln -nfs ~/.ssh/facebooker.yml #{release_path}/config/facebooker.yml"
+  end
 end
