@@ -56,6 +56,10 @@ class ApplicationController < ActionController::Base
     super unless request_comes_from_facebook? 
   end
 
+  def facebook_user
+    facebook_session
+  end
+
   protected
 
   # Called from #current_user.  First attempt to login by the user id stored in the session.
