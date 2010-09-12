@@ -13,7 +13,7 @@
   <div>
   <span class="post_date"><%= l post.published, :format => :long %></span>
     <% if post.from_url %>
-      <%=link_to image_tag('feed-icon-14x14.png', :alt=>"%> <%= t(:original_source %> <%="), post.from_url, :target => '_blank' %>
+      <%=link_to image_tag('feed-icon-14x14.png', :alt=>"(t:original_source)"), post.from_url, :target => '_blank' %>
     <% end %>
     <span class="post_title"><%= post_link(post) %></span>
     <% unless post.tag_list.size == 0 %>
