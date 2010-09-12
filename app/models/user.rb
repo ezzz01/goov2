@@ -105,10 +105,10 @@ class User < ActiveRecord::Base
   end
  
 #We are going to connect this user object with a facebook id. But only ever one account.
-  def link_fb_connect(fb_user_id)
-    unless fb_user_id.nil?
+  def link_fb_connect(facebook_session)
+    unless facebook_session.user.id.nil?
       #check for existing account
-      existing_fb_user = User.find_by_fb_user_id(fb_user_id)
+      existing_fb_user = User.find_by_fb_user_id(facebook_session.user.id)
    
       #unlink the existing account
       unless existing_fb_user.nil?
@@ -117,7 +117,9 @@ class User < ActiveRecord::Base
       end
    
       #link the new one
-      self.fb_user_id = fb_user_id
+      self.fb_user_id = facebook_session.user.id 
+      self.surname = facebook_session.user.last_name
+      self.name = facebook_session.user.first_name
       save(false)
     end
   end
