@@ -111,7 +111,7 @@ class UsersController < ApplicationController
       User.create_from_fb_connect(facebook_session.user)
     else
       #connect accounts
-      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+      self.current_user.link_fb_connect(facebook_session) unless self.current_user.fb_user_id == facebook_session.user.id
     end
     redirect_to root_url 
   end
