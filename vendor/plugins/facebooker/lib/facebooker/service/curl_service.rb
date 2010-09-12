@@ -3,6 +3,7 @@ Facebooker.use_curl = true
 class Facebooker::Service::CurlService < Facebooker::Service::BaseService
   def post_form(url,params,multipart=false)
     curl = Curl::Easy.new(url.to_s) do |c|
+      c.headers["Expect:"] = "" 
       c.multipart_form_post = multipart
       c.timeout = Facebooker.timeout
     end
