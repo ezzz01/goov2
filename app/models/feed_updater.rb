@@ -104,7 +104,8 @@ def self.add_entries(entries, user)
         Post.create!(   
           :title      => entry.title.slice(0, 96) + (entry.title.length > 96 ? "..." : ""),   
           :body       => entry.content + " ",   
-          :created_at => entry.published,   
+          #fix for Goethe institut - they set published date to the day of event - not fair!
+          :created_at => entry.published > Time.now + 1.day ? Time.now : entry.published
           :user_id    => user.id,
           :from_url   => entry.url,
           :guid       => entry.id,
