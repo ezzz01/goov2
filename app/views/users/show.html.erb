@@ -38,7 +38,7 @@
 
 <% hidden_div_if(@user.blog_url.blank?, :class => "profile_block") do %>
   <b><%= t(:external_blog) %>:</b>
-  <%= link_to @user.blog_url, blog_path(@user.username) %>
+  <%= link_to @user.blog_url, @user.blog_url %>
 <% end %>
 
 <div class="profile_block">
