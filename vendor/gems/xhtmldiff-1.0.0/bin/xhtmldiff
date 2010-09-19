@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'xhtmldiff'
+
+include REXML
+
+if ARGV.size != 2
+	puts "usage: #{File.basename($0)} old new > output.html"
+	exit 255
+end
+
+odoc = Document.new
+odoc << (Element.new 'html')
+odoc.root << (head = Element.new 'head')
+head << (title = Element.new 'title')
+title << Text.new("Diff of #{ARGV[0]} and #{ARGV[1]}")
+odoc.root << (body = Element.new 'body')
+
+hd = XHTMLDiff.new(body)
+
+a = HashableElementDelegator.new(XPath.first(Document.new(File.read(ARGV[0])), '/html/body'))
+b = HashableElementDelegator.new(XPath.first(Document.new(File.read(ARGV[1])), '/html/body'))
+
+Diff::LCS.traverse_balanced(a, b, hd)
+
+odoc.write($stdout, 0, false, true)
+
