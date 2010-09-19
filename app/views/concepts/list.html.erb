@@ -1,0 +1,56 @@
+<%- @title -%>
+
+<%= categories_menu unless @categories.empty? %>
+
+<div id="allPages">
+<%- unless @pages_that_are_orphaned.empty? && @page_names_that_are_wanted.empty? -%>
+  <h2>
+    <%= @title %>
+  </h2>
+<%- end -%>
+
+<ul>
+  <%- @concepts_in_category.each do |concept| -%>
+    <li>
+      <%= link_to_existing_concept concept, truncate(concept.plain_name, :length => 50) %>
+    </li>
+  <%- end -%>
+</ul>
+</div>
+
+<div id="wantedPages">
+<%- unless @page_names_that_are_wanted.empty? -%>
+  <h2>
+    <%= t(:wanted_pages_in_this_category) %>
+  </h2>
+
+  <ul> 
+  <%- @page_names_that_are_wanted.each do |wanted_concept_title| -%>
+    <li>
+      <%= link_to_concept(wanted_concept_title, truncate(WikiWords.separate(wanted_concept_title), :length => 50)) %>
+      <%= t(:link_from) %> 
+      <%= 
+        ConceptSet.new.concepts_that_reference(wanted_concept_title).collect { |referring_concept|            
+          link_to_existing_concept referring_concept
+          }.join(", ") 
+      %>
+    </li>
+  <%- end -%>
+  </ul>
+<%- end -%>
+
+<%- unless @pages_that_are_orphaned.empty? -%>
+  <h2>
+    <%= t(:pages_without_references_in_category, :category => @category ) %>
+  </h2>
+
+  <ul>
+    <%- @pages_that_are_orphaned.each do |orphan_concept| -%>
+      <li>
+        <%= link_to_existing_concept orphan_concept, truncate(orphan_concept.plain_name, :length => 50) %>
+      </li>
+    <%- end -%>
+  </ul>
+<%- end -%>
+</div>
+

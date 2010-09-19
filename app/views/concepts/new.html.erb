@@ -1,35 +1,27 @@
-<h1>New concept</h1>
+<h1><%= t(:new_page) %></h1>
 
 <% form_for(@concept) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :title %><br />
+    <%= f.label :title, t(:title) %><br />
     <%= f.text_field :title %>
   </p>
+
+  <%= render "revision", :current_revision => @current_revision,  :object => Revision.new %> 
+
+  <% if can? :delete, Concept %>
+    <p>
+      <%= f.label :goout_intern %>
+      <%= f.check_box :goout_intern %>
+    </p>
+  <% end %>
   <p>
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </p>
+
   <p>
-    <%= f.label :added_by %><br />
-    <%= f.text_field :added_by %>
-  </p>
-  <p>
-    <%= f.label :subject_area_id %><br />
-    <%= f.text_field :subject_area_id %>
-  </p>
-  <p>
-    <%= f.label :country_id %><br />
-    <%= f.text_field :country_id %>
-  </p>
-  <p>
-    <%= f.label :goout_intern %><br />
-    <%= f.check_box :goout_intern %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit t(:create) %>
   </p>
 <% end %>
 
-<%= link_to 'Back', concepts_path %>
+<%= link_to t(:back), concepts_path %>
+

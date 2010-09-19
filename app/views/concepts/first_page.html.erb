@@ -1,0 +1,46 @@
+<h1><%= t(:wiki) %></h1>
+<div id="categories">
+  <h4><%= t(:categories) %></h4>
+  <%= wiki_first_page_menu %> 
+</div>
+
+<div id="wantedPages">
+<%- unless @page_names_that_are_wanted.empty? -%>
+  <h2>
+    <%= t(:want_to_contribute) %>
+  </h2>
+  <span><%= t(:contribute_hint) %></span>
+
+  <ul>
+  <%- @page_names_that_are_wanted.each do |wanted_concept_title| -%>
+    <li>
+      <%= link_to_concept(wanted_concept_title, truncate(WikiWords.separate(wanted_concept_title), :length => 50)) %>
+      <%= t(:link_from) %> 
+      <%=
+        ConceptSet.new.concepts_that_reference(wanted_concept_title).collect { |referring_concept|            
+          link_to_existing_concept referring_concept
+          }.join(", ") 
+      %>
+    </li>
+  <%- end -%>
+  </ul>
+<%- end -%>
+
+<%- unless @pages_that_are_orphaned.empty? -%>
+  <h2>
+    <%= t(:pages_without_references) %>
+  </h2>
+
+  <ul>
+    <%- @pages_that_are_orphaned.each do |orphan_concept| -%>
+      <li>
+        <%= link_to_existing_concept orphan_concept, truncate(orphan_concept.plain_name, :length => 50) %>
+      </li>
+    <%- end -%>
+  </ul>
+<%- end -%>
+</div>
+<div>
+<%= link_to t(:create_new_page), new_concept_path %>
+</div>
+

@@ -25,12 +25,12 @@ class Ability
 
         if user.try(:username)
           #can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
-          can :create, [Post]
+          can :create, [Concept, Post, Revision]
         end
 
         if user.try(:username)
          # can :update, [ ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Concept, Revision]
-          can :update, [Post]
+          can :update, [Concept, Post, Revision]
         end
  
         can [:update, :destroy], User do |edit_user|

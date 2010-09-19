@@ -1,0 +1,5 @@
+<% fields_for "concept[new_revision]", revision do |revision_form| %>
+<%= revision_form.label :content, t(:content) %>
+<%= revision_form.text_area :content, :value => current_revision, :rows=> 30, :cols => 80 %>
+<% end %>
+

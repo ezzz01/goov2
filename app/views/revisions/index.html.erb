@@ -1,0 +1,17 @@
+<h1><%= t(:edit_history) %> <%= t(:for_page)+": " + @revisions.first.concept.title %> </h1>
+
+<table>
+
+<% @revisions.each do |revision| %>
+  <tr>
+    <td><%=link_to revision.author.username, user_path(revision.author) %></td>
+    <td><%=link_to ( l revision.created_at, :format => :long), concept_revision_path(revision.concept, revision) %></td>
+    <td><%=h revision.content %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t(:new_revision), :controller => 'Concepts', :id => @revisions.first.concept, :action => 'edit' %>
+

@@ -1,33 +1,17 @@
-<p>
-  <b>Title:</b>
-  <%=h @concept.title %>
-</p>
+<h1><%=h @concept.title %></h1>
 
-<p>
-  <b>Type:</b>
-  <%=h @concept.type %>
-</p>
+<div class="edit_history">
+  <%= link_to t(:edit_history), concept_revisions_path(@concept) %> |
+  <%= link_to t(:edit), edit_concept_path(@concept) %> |
+  <%= t(:last_edit) %>:
+  <%= profile_for(@author) %>,
+  <%=h @concept.revisions.last.created_at.as_lt_words unless @concept.revisions.empty? %>
+</div>
 
-<p>
-  <b>Added by:</b>
-  <%=h @concept.added_by %>
-</p>
-
-<p>
-  <b>Subject area:</b>
-  <%=h @concept.subject_area_id %>
-</p>
-
-<p>
-  <b>Country:</b>
-  <%=h @concept.country_id %>
-</p>
-
-<p>
-  <b>Goout intern:</b>
-  <%=h @concept.goout_intern %>
-</p>
+<div class="wiki_content">
+  <%= @renderer.display_content unless @concept.revisions.empty? %>
+</div>
 
 
-<%= link_to 'Edit', edit_concept_path(@concept) %> |
-<%= link_to 'Back', concepts_path %>
+<%= link_to t(:back), concepts_path %>
+

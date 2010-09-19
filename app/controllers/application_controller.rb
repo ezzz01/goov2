@@ -79,6 +79,14 @@ class ApplicationController < ActionController::Base
     @current_user = new_user || false
   end
 
+  #for instiki
+  def setup_url_generator
+    PageRenderer.setup_url_generator(UrlGenerator.new(self))
+  end
+
+  def teardown_url_generator
+    PageRenderer.teardown_url_generator
+  end
 
 
 

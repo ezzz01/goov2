@@ -189,6 +189,7 @@
   :content => "Turinys",
   :new_page => "Naujas wiki puslapis",
   :create_new_page => "Sukurti naują wiki puslapį",
+  :edit_page => "Redaguoti puslapį",
   :page_was_successfully_created => "Naujas puslapis sukurtas sėkmingai",
   :page_was_successfully_updated => "Puslapis atnaujintas sėkmingai",
   :last_edit => "Paskutinis redagavimas", 

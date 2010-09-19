@@ -12,7 +12,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :roles
 
-  map.resources :concepts
+  map.resources :concepts, :as => "wiki"
+  map.resources :concepts do |concept|
+    concept.resources :revisions
+  end
+
+
   map.resources :countries
   map.resources :friendships
 
@@ -40,8 +45,9 @@ ActionController::Routing::Routes.draw do |map|
   map.post 'user/:user/blog/:id', :controller => 'posts', :action => 'show', :id => ''
   map.user_profile 'user/:user', :controller => "users", :action => "show"
   map.questions_tag 'questions/tag/:tag', :controller => "questions", :action => "index"
-
   map.zeitgeist "zeitgeist/:tag", :controller => "zeitgeist", :action => "index"
+  map.list 'list/:category', :controller => 'concepts', :action => 'list'
+  map.page 'wiki/show/:id', :controller => 'concepts', :action => 'show'
 
   map.root :controller => "site" 
 
