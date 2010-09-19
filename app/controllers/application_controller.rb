@@ -9,8 +9,9 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :fb_sig_friends, :password, :password_confirmation
-
+  before_filter :setup_url_generator
   before_filter :set_facebook_session
+  after_filter :teardown_url_generator
   helper_method :facebook_session, :current_user, :facebook_user
 
   before_filter :current_user

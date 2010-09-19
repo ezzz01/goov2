@@ -1,7 +1,5 @@
 class ConceptsController < ApplicationController
   authorize_resource
-  before_filter :setup_url_generator
-  after_filter :teardown_url_generator
   before_filter :load_page
  
   def load_page

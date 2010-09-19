@@ -2,17 +2,20 @@ class SiteController < ApplicationController
 
   def index
     @title = t(:start_page) 
-    @content = Concept.find_by_title("goout_start").revisions.last
+    @concept = Concept.find_by_title("goout_start")
+    @renderer = PageRenderer.new(@concept.revisions.last)
   end
 
   def about
      @title = t(:about)
-     @content = Concept.find_by_title("goout_about").revisions.last
+     @concept = Concept.find_by_title("goout_about")
+     @renderer = PageRenderer.new(@concept.revisions.last)
   end
 
   def help
      @title = t(:help) 
-     @content = Concept.find_by_title("goout_help").revisions.last
+     @concept = Concept.find_by_title("goout_help")
+     @renderer = PageRenderer.new(@concept.revisions.last)
   end
 
   def blog
