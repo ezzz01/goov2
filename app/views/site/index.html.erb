@@ -2,9 +2,16 @@
   <iframe src="http://www.facebook.com/plugins/like.php?href=www.go-out.lt&amp;layout=standard&amp;show_faces=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:80px;" allowTransparency="true"></iframe>
 </div>
 
+  
 <div id="main">
   <%= @renderer.display_content %>
+
+  <div class="box">
+    <%= link_to t(:unanswered_questions), unanswered_questions_path %>
+  </div>
+
   <h3><%= t(:last_wiki_updates) %></h3>
+
   <div class="wiki_updates">
     <% CustomLogger.last_entries.each do |line| %>
       <%=line + "<br />" %>

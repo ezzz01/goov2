@@ -12,6 +12,7 @@
   </div>
   <div>
   <span class="post_date"><%= l question.created_at, :format => :long %></span>
+  <span class="post_title"><%= link_to question.title, question_path(question) %></span>
     <% unless question.tag_list.blank? %>
       <div> <%= render :partial => "tags/tag_list", :locals => {:item => question  } %> </div>
     <% end %>

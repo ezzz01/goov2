@@ -326,3 +326,15 @@ div.auto_complete {
 .vote_buttons {
   display: inline;
 }
+
+.box {
+  
+  border:  1px solid #aaaaaa;
+  margin: 4px;
+  padding: 4px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  max-width: 400px;
+}

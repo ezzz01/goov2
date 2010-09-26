@@ -1,5 +1,8 @@
-<% form_for(@question) do |f| %>
+<div class="answer">
+<% form_for(question) do |f| %>
   <%= f.error_messages %>
+
+  <h3><%= t(:ask_new_question) %></h3>
 
   <p>
     <%= f.label t(:title) %>
@@ -7,7 +10,7 @@
   </p>
 
   <p>
-    <%= f.text_area :body, :rows => 30, :cols => 80 %>
+    <%= f.text_area :body, :rows => 5, :cols => 80 %>
   </p>
 
   <p>
@@ -19,5 +22,6 @@
     <%= f.submit button_name %>
   </p>
 <% end %>
+</div>
 
 

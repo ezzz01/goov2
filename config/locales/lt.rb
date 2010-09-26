@@ -171,6 +171,8 @@
   :full_question => "Pilnas klausimas",
   :edit_question => "Redaguoti klausimą",
   :all_questions => "Visi klausimai",
+  :ask_new_question => "Užduok naują klausimą!",
+  :unanswered_questions => "Neatsakyti klausimai",
   :view_answers => "Peržiūrėti atsakymus",
   :number_of_answers => "Atsakymų",
 

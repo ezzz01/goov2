@@ -3,6 +3,9 @@
 </div>
 
 <div id="main">
+
+<%= render :partial => "form", :locals => {:button_name => t(:send), :question => Question.new} %>
+
 <% for question in @questions %>
   <%= render :partial => "questions/question_header", :locals => { :question => question } %>
   <%= render :partial => "questions/question_body", :locals => { :question => question } %>
@@ -32,5 +35,9 @@
 </div>
 
 <div id="sidebar">
+  <div class="box">
+    <%= link_to t(:unanswered_questions), unanswered_questions_path %>
+  </div>
+  <%= render :partial => "questions/tag_cloud" %>
 </div>
 

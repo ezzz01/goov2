@@ -9,6 +9,9 @@ class QuestionsController < ApplicationController
       @questions = Question.find(:all, :order => "created_at DESC").paginate(:per_page => 20)
       @title = t(:all_questions)
     end
+    @new_question = Question.new
+
+    @tags = Question.tag_counts.sort{|x, y| x.name.downcase <=> y.name.downcase }
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,4 +86,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def unanswered
+    @questions = Question.find_by_sql("SELECT * FROM questions qu WHERE qu.id NOT IN ( SELECT DISTINCT question_id FROM answers) order by created_at DESC ").paginate(:per_page => 20)
+   @title = t(:unanswered_questions)
+
+   @tags = Question.tag_counts.sort{|x, y| x.name.downcase <=> y.name.downcase }
+
+   respond_to do |format|
+      format.html { render :action => "index" }
+    end
+
+  end
 end

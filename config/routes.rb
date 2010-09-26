@@ -6,9 +6,15 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :answers
 
+  map.resources :questions, :collection => { :unanswered => :get }
+
   map.resources :questions do |question|
+    question.resources :tags do |tag|
+      tag.resources :answers
+    end
     question.resources :answers
   end
+
 
   map.resources :roles
 

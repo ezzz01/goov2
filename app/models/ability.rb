@@ -9,6 +9,7 @@ class Ability
       else
         can :read, :all
         can :list, :all
+        can :unanswered, Question
 
         #workaroud for custom action via AJAX call. Permission is checked in action
         can :mark_as_deleted, :all
