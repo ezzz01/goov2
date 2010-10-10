@@ -66,7 +66,7 @@ class ConceptsController < ApplicationController
   def create
     @concept = Concept.new(params[:concept])
     @concept.revisions.last.author = current_user
-    @concept.revisions.last.content += "\n\nKategorijos: " + params[:concept][:categories]
+    @concept.revisions.last.content += "\n\nKategorijos: " + params[:concept][:category_list]
     @concept.revisions.last.concept = @concept
     renderer = PageRenderer.new
     renderer.revision = @concept.revisions.last

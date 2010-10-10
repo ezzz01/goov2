@@ -10,7 +10,7 @@
 
   <p>
     <%= f.label t(:categories_with_hint) %>
-    <%= f.text_field :categories, :size => 60 %>
+    <%= f.text_field :category_list, :size => 60 %>
   </p>
 
   <%= render "revision", :current_revision => @current_revision,  :object => Revision.new %> 
