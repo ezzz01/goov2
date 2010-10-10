@@ -338,3 +338,9 @@ div.auto_complete {
   font-weight: bold;
   max-width: 400px;
 }
+
+.wmd-preview {
+  border: 1px solid #aaaaaa;
+  background-color: #fff4d7;
+  max-width: 800px;
+}

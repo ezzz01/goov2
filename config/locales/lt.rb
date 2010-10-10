@@ -16,6 +16,7 @@
   :title => "Pavadinimas",
   :tag_list => "Žymės",
   :tags => "Žymės",
+  :tags_with_hint => "Žymės (skirtukas - kablelis)",
   :blog => "Tinklaraštis",
   :rss_source => "Tinklaraščio RSS šaltinio adresas",
   :rss_cource_explanation => "Pvz. http://feeds2.feedburner.com/vartotojas/ arba http://vartotojas.wordpress.com/feed/",
@@ -33,6 +34,7 @@
   :new_study_program => "Sukurti naują studijų programą",
   :new_exchange_program => "Sukurti naują mainų programą",
   :new_activity_area => "Sukurti naują veiklos sritį",
+  :dynamic_preview => "Peržiūra",
 
   :back => "Atgal",
   :show => "Rodyti",
