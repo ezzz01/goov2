@@ -1,7 +1,7 @@
 <div id="main">
   <div id="posts">
     <%= render :partial => "questions/question_header", :locals => { :question => @question } %>
-    <%= render :partial => "questions/question_body", :locals => { :question => @question } %>
+    <%= render :partial => "questions/question_body", :locals => { :question => @question.body } %>
     <div class="answers" id="answers_for_question_<%=@question.id %>">
       <%= render :partial => "answers/answer", :collection => @question.sorted_answers %>
     </div>
@@ -24,5 +24,9 @@
 </div>
 
 <div id="sidebar">
+ <div class="box">
+    <%= link_to t(:unanswered_questions), unanswered_questions_path %>
+  </div>
+
 </div>
 

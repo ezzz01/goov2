@@ -19,7 +19,7 @@ class RevisionsController < ApplicationController
   # GET /revisions/1.xml
   def show
     @revision = Revision.find(params[:id])
-
+    @category = 
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @revision }

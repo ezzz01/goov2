@@ -181,6 +181,7 @@
   #wiki
   :wiki_start_page => "Pirmas wiki puslapis",
   :categories => "Kategorijos",
+  :categories_with_hint => "Kategorijos (skirtukas - kablelis)",
   :edit_concept => "Redaguoti puslapį",
   :all_pages_in_category => "Visi puslapiai kategorijoje",
   :wanted_pages_in_this_category => "Trūkstami puslapiai šioje kategorijoje",

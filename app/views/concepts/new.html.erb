@@ -4,8 +4,13 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :title, t(:title) %><br />
-    <%= f.text_field :title %>
+    <%= f.label :title, t(:title) %>
+    <%= f.text_field :title, :size => 60 %>
+  </p>
+
+  <p>
+    <%= f.label t(:categories_with_hint) %>
+    <%= f.text_field :categories, :size => 60 %>
   </p>
 
   <%= render "revision", :current_revision => @current_revision,  :object => Revision.new %> 
@@ -17,6 +22,10 @@
     </p>
   <% end %>
   <p>
+
+ <h3><%= t(:dynamic_preview) %></h3>
+
+ <div class="wmd-preview"></div>
 
   <p>
     <%= f.submit t(:create) %>

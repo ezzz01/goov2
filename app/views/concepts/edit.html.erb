@@ -8,7 +8,13 @@
    <%= f.text_field :title, :size => 60 %>
   </p>
 
+  <p>
+    <%= f.label t(:categories_with_hint) %>
+    <%= f.text_field :category_list, :size => 60 %>
+  </p>
+
   <%= render "revision", :current_revision => @current_revision,  :object => Revision.new %> 
+
 
   <% if can? :delete, Concept %>
     <p>
@@ -22,7 +28,6 @@
  <div class="wmd-preview"></div>
 
   <p>
-
     <%= f.submit t(:update) %>
   </p>
 <% end %>

@@ -8,7 +8,7 @@
 
 <% for question in @questions %>
   <%= render :partial => "questions/question_header", :locals => { :question => question } %>
-  <%= render :partial => "questions/question_body", :locals => { :question => question } %>
+  <%= render :partial => "questions/question_body", :locals => { :question => question.body } %>
 
   <div class="blog_post_footer">
     <b><%= t(:number_of_answers) %>:</b>

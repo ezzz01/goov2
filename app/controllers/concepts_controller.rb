@@ -57,6 +57,8 @@ class ConceptsController < ApplicationController
     @concept = Concept.find(params[:id])
     @title = t(:edit_page) + " \"" + @concept.title + "\""
     @current_revision = (@concept.revisions.empty?)? "" : @concept.revisions.last.content
+    @current_revision = @current_revision.gsub(/^Kategorijos:(.*)$/, "")
+    @concept.category_list = @concept.categories.join(", ")
   end
 
   # POST /concepts
@@ -64,9 +66,14 @@ class ConceptsController < ApplicationController
   def create
     @concept = Concept.new(params[:concept])
     @concept.revisions.last.author = current_user
+    @concept.revisions.last.content += "\n\nKategorijos: " + params[:concept][:categories]
     @concept.revisions.last.concept = @concept
+    renderer = PageRenderer.new
+    renderer.revision = @concept.revisions.last
+    rendering_result = renderer.render(update_references = true)
+    wiki_references = renderer.update_references(rendering_result)
     respond_to do |format|
-      if @concept.save
+      if @concept.save && @concept.update_attribute("wiki_references", wiki_references) 
         CustomLogger.wikilog.info(I18n.t(:added_new_concept, :user => current_user.username, :title => @concept.title))
         flash[:notice] = t(:page_was_successfully_created) 
         format.html { redirect_to(concept_path(@concept.title)) }
@@ -83,8 +90,10 @@ class ConceptsController < ApplicationController
     @concept = Concept.find(params[:id])
     @updates = params[:concept]
     @updates[:new_revision][:author_id] = current_user.id
+    #add categories from separate input field
+    @updates[:new_revision][:content] += "\n\nKategorijos: " + @updates[:category_list]
     renderer = PageRenderer.new
-    revision = Revision.new(@updates[:new_revision])
+    revision = Revision.new(@updates[:new_revision]) 
     revision.concept = @concept
     renderer.revision = revision
     rendering_result = renderer.render(update_references = true)
@@ -126,7 +135,7 @@ class ConceptsController < ApplicationController
    @categories = WikiReference.list_categories.sort
    @category = params['category']
    if @category
-     @set_name = "category '#{@category}'"
+     @set_name = "Kategorijos '#{@category}'"
      concepts = WikiReference.concepts_in_category(@category).sort.map { |concept_title| Concept.find_by_title(concept_title) }
      @concepts_in_category = ConceptSet.new(concepts)
    else

@@ -1,6 +1,7 @@
 class Concept < ActiveRecord::Base
   has_many :revisions, :dependent => :destroy
   has_many :wiki_references, :order => 'referenced_name'
+  attr_accessor :category_list
   validates_presence_of :title
   validates_uniqueness_of :title
   

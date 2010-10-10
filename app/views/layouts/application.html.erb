@@ -13,7 +13,9 @@
   <meta property="fb:admins" content="1385077102"/>
   <meta property="og:description"
           content="Studijuoji ar nori studijuoti užsienyje? Atlieki užsienyje praktiką, stažuojiesi, dalyvauji projekte? Prisijunk!"/>
-<title><%= @title %></title>
+
+  <title><%= @title %></title>
+
 <%= stylesheet_link_tag "site" %>
 <%= stylesheet_link_tag 'lightbox' %>
 <%= javascript_include_tag :defaults %>
@@ -25,39 +27,8 @@
       <%= fb_user_action(@user_action_to_publish) if @user_action_to_publish %>
     <% end %>
 
-<% if @include_post_form || @include_wiki_form  %>
-  <%= javascript_include_tag 'jquery-1.3.2.min.js' %>
-  <%= stylesheet_link_tag 'markitup.css' %>
-  <%= javascript_include_tag 'markitup/jquery.markitup.pack.js' %>
-<% end %>
-
-<% if @include_wiki_form  %>
-  <%= stylesheet_link_tag 'markitup/sets/style_markdown.css' %>
-  <%= javascript_include_tag 'markitup/sets/default/markdown.js' %>
-
-  <script type="text/javascript">
-  <!--
-  $(document).ready(function(){
-    $('#concept_new_revision_content').markItUp(mySettings);
-  });
-  -->
-  </script>
-<% end %>
-
-<% if @include_post_form  %>
-  <%= stylesheet_link_tag 'markitup/sets/style_html.css' %>
-  <%= javascript_include_tag 'markitup/sets/default/html.js' %>
-
-  <script type="text/javascript">
-  <!--
-  $(document).ready(function(){
-    $('#post_body').markItUp(mySettings);
-  });
-  -->
-  </script>
-<% end %>
-
 </head>
+
 <body>
 <div style="max-width: 1200px">
   <%= nav_link t(:start_page), "site" %>
@@ -93,23 +64,29 @@
 </div>
 
 <% if ENV["RAILS_ENV"] == "production" %>
+  <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ?  "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
 <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ?  "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-15321033-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+  try {
+    var pageTracker = _gat._getTracker("UA-15321033-1");
+    pageTracker._trackPageview();
+  } catch(err) {}
+  </script>
 <% end %>
+
   <%= javascript_tag "window.api_key = '#{Facebooker.api_key}';" %>
   <%= javascript_tag "window.xd_receiver_location = '#{ENV['XD_RECEIVER_LOCATION']}';" %>
   <%= javascript_tag "window.facebook_authenticate_location = '#{ENV['FACEBOOK_AUTHENTICATE_LOCATION']}';" %>
   <%= javascript_include_tag 'facebook_require' %>
   <script type="text/javascript">
     wmd_options = {
-			output: "Markdown",
+      <% if @include_wiki_form  %>
+          output: "Markdown",
+      <% else %>
+          output: "Html",
+      <% end %>
 		};
   </script>
   <%= javascript_include_tag 'wmd/wmd.js' %>

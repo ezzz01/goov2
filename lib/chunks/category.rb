@@ -9,7 +9,7 @@ require 'chunks/chunk'
 # Category lines can be hidden using ':category: news', for example
 class Category < Chunk::Abstract
 
-  CATEGORY_PATTERN = /^(:)?category\s*:(.*)$/i
+  CATEGORY_PATTERN = /^(:)?Kategorijos\s*:(.*)$/i
   def self.pattern() CATEGORY_PATTERN  end
 
   attr_reader :hidden, :list
@@ -25,7 +25,7 @@ def initialize(match_data, content)
       @unmask_text = ''
     else
       category_urls = @list.map { |category| url(category) }.join(', ')
-      @unmask_text = '<div class="property"> category: ' + category_urls + '</div>'
+      @unmask_text = '<div class="property"> Kategorijos: ' + category_urls + '</div>'
     end
   end
 
