@@ -1,2 +1,0 @@
-class Country < Concept 
-end

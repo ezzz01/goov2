@@ -1,0 +1,5 @@
+page.hide "add_activity_link" 
+page.replace_html "add_activity_form", :partial => "new_activity" 
+page.visual_effect :blind_down, "add_activity_form"
+page << "initialize();" 
+

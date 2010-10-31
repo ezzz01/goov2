@@ -11,6 +11,15 @@ class Concept < ActiveRecord::Base
     CustomLogger.new(@@logfile)
   end
 
+
+  def self.find_all_countries
+    Concept.find(:all, :joins => "join wiki_references on wiki_references.concept_id = concepts.id", :conditions => ["wiki_references.referenced_name = ?", "Šalys"])
+  end
+
+  def self.find_all_subject_areas
+    Concept.find(:all, :joins => "join wiki_references on wiki_references.concept_id = concepts.id", :conditions => ["wiki_references.referenced_name = ?", "Studijų sritys"])
+  end
+
  def new_revision=(revision_attributes)
    revisions.build(revision_attributes)
  end

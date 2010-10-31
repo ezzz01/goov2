@@ -35,6 +35,7 @@
   :new_exchange_program => "Sukurti naują mainų programą",
   :new_activity_area => "Sukurti naują veiklos sritį",
   :dynamic_preview => "Peržiūra",
+  :formating_help => "Teksto formatavimo pagalba",
 
   :back => "Atgal",
   :show => "Rodyti",

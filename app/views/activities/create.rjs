@@ -1,0 +1,7 @@
+page.replace_html "activities_for_user", :partial => "activities/activity",
+                        :collection => @user.activities
+page.show "add_activity_link"
+page.hide "add_activity_form"
+page.visual_effect :highlight, "activity_#{@activity.id}", :duration => 2
+flash.discard
+

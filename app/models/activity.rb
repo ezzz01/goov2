@@ -1,11 +1,11 @@
 class Activity < ActiveRecord::Base
   belongs_to :user
-  belongs_to :country
-  belongs_to :organization
+  belongs_to :country, :class_name => "Concept"
+  belongs_to :organization, :class_name => "Concept"
+  belongs_to :study_program, :class_name => "Concept"
+  belongs_to :exchange_program, :class_name => "Concept"
+  belongs_to :activity_area, :class_name => "Concept"
   
-  def country_id
-  end
-
   def self.model_name
     name = "activity"
     name.instance_eval do

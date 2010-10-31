@@ -3,9 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/fb/:action', :controller => 'facebook'
 
   map.resources :votes
-
   map.resources :answers
-
   map.resources :questions, :collection => { :unanswered => :get }
 
   map.resources :questions do |question|
@@ -15,7 +13,6 @@ ActionController::Routing::Routes.draw do |map|
     question.resources :answers
   end
 
-
   map.resources :roles
 
   map.resources :concepts, :as => "wiki"
@@ -23,13 +20,10 @@ ActionController::Routing::Routes.draw do |map|
     concept.resources :revisions
   end
 
-
-  map.resources :countries
   map.resources :friendships
 
-  map.resources :activities
-
   map.resources :users, :collection => {:link_user_accounts => :get} do |user|
+    user.resources :activities
     user.resources :tags do |tag|
       tag.resources :posts
     end

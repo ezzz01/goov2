@@ -1,0 +1,6 @@
+<%= label_tag ("activity_study_program_id", t(:study_program)) %>
+<%= collection_select("activity", :study_program_id, study_programs, :id, :title,
+  {:prompt   => t(:select_study_program)}) if !study_programs.blank? %>
+	<span id="add_studyprogram_link">
+        <%= link_to t(:new_study_program), new_study_program_path(:subject_area_id => id) ,:class => 'lbOn' %>
+    </span>

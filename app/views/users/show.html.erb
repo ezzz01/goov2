@@ -46,6 +46,24 @@
   <%= link_to blog_path(@user.username), blog_path(@user.username) %>
 </div>
 
+<div class="profile_block">
+  <b><%= t(:studies) %>:</b>
+    <% if can? :update, @user %>
+      <span id="add_activity_link">
+        <%= link_to_remote t(:new_entry),
+          {:url => new_user_activity_path(@user), 
+          :method => :get},
+          :href => new_user_activity_path(@user)
+        %>
+      </span>
+    <% end %>
+    <div id="add_activity_form"> </div>
+  <% hidden_div_if(@user.activities.empty?, :id => "activities_for_user", :class => "profile_block") do %>
+      <%= render :partial => "activities/activity", :collection => @user.activities %>
+  <% end %>
+</div>
+
+
 <% hidden_div_if(@user.current_country.blank?, :class => "profile_block") do %>
   <b><%= t(:current_country) %>:</b>
   <%=h @user.current_country.try(:title) %>

@@ -1,0 +1,6 @@
+<%= label_tag ("activity_activity_area_id", t(:activity_area)) %>
+<%= collection_select("activity", :activity_area_id, activity_areas, :id, :title,
+  {:prompt   => t(:select_activity_area)}) if !activity_areas.blank? %>
+	<span id="add_activityarea_link">
+        <%= link_to t(:new_activity_area), new_activity_area_path,:class => 'lbOn' %>
+    </span>

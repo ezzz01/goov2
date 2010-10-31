@@ -1,0 +1,2 @@
+page.visual_effect :highlight, "activity_#{@activity.id}", :duration => 2
+page.visual_effect :toggle_blind, "activity_#{@activity.id}", :duration => 2

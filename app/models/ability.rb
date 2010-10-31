@@ -22,11 +22,11 @@ class Ability
         can :update_fields, :all
         can :autocomplete_tag_list, :all
         can :link_user_accounts, :all
-        can :create, [ Answer, Comment, Friendship, Question, User ]
+        can :create, [ Activity, Answer, Comment, Friendship, Question, User ]
 
         if user.try(:username)
           #can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
-          can :create, [Concept, Post, Revision]
+          can :create, [Activity, Concept, Post, Revision]
         end
 
         if user.try(:username)
@@ -42,9 +42,9 @@ class Ability
              post.try(:user) == user
          end
 
-#        can [:update, :destroy], Activity do |activity|
-#            activity.user == user
-#        end
+         can [:update, :destroy], Activity do |activity|
+             activity.user == user
+         end
 
          can [:update, :destroy], Question do |question|
              question.try(:user) == user

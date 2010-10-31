@@ -1,0 +1,10 @@
+<%= label_tag ("activity_country_id", t(:country)) %>
+<%= collection_select("", :country_id, countries, :id, :title, 
+       {:prompt   => t(:select_country)},
+        {:style => "width: 400px;", :onchange => "#{remote_function(:url  => {:controller => "activities", :action => "update_organizations"},
+         :with => "'country_id='+value")}"}  ) %>
+
+   <span id="add_country_link">
+          <%= link_to t(:create_new_country), new_country_path ,:class => 'lbOn' %>
+      </span>
+

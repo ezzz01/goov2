@@ -1,5 +1,6 @@
 <h1><%= t(:new_page) %></h1>
 
+<div id="main">
 <% form_for(@concept) do |f| %>
   <%= f.error_messages %>
 
@@ -33,4 +34,10 @@
 <% end %>
 
 <%= link_to t(:back), concepts_path %>
+
+</div>
+
+<div id="sidebar">
+  <%= render :partial => "markup_help" %>  
+</div>
 

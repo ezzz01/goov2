@@ -1,85 +1,103 @@
 class ActivitiesController < ApplicationController
-  # GET /activities
-  # GET /activities.xml
-  def index
-    @activities = Activity.all
+  load_and_authorize_resource
+  include ApplicationHelper
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @activities }
-    end
-  end
-
-  # GET /activities/1
-  # GET /activities/1.xml
-  def show
-    @activity = Activity.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @activity }
-    end
-  end
-
-  # GET /activities/new
-  # GET /activities/new.xml
-  def new
+  def new 
+    @countries = Concept.find_all_countries
+    @subject_areas = Concept.find_all_subject_areas
     @activity = Activity.new
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @activity }
+      format.js 
     end
   end
 
-  # GET /activities/1/edit
   def edit
-    @activity = Activity.find(params[:id])
+
   end
 
-  # POST /activities
-  # POST /activities.xml
   def create
-    @activity = Activity.new(params[:activity])
-
+    if(params[:my_type] == "full_study")
+        @activity = FullStudy.new(params[:activity])
+    elsif(params[:my_type] == "exchange_study")
+        @activity = ExchangeStudy.new(params[:activity])
+    elsif(params[:my_type] == "internship")
+        @activity = Internship.new(params[:activity])
+    end
+    @user = current_user 
+    @activity.user_id = @user.id
     respond_to do |format|
       if @activity.save
-        flash[:notice] = 'Activity was successfully created.'
-        format.html { redirect_to(@activity) }
-        format.xml  { render :xml => @activity, :status => :created, :location => @activity }
+        format.js 
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
+        flash[:notice] = t(:error_on_saving)
       end
     end
   end
 
-  # PUT /activities/1
-  # PUT /activities/1.xml
-  def update
-    @activity = Activity.find(params[:id])
-
-    respond_to do |format|
-      if @activity.update_attributes(params[:activity])
-        flash[:notice] = 'Activity was successfully updated.'
-        format.html { redirect_to(@activity) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @activity.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /activities/1
-  # DELETE /activities/1.xml
   def destroy
     @activity = Activity.find(params[:id])
     @activity.destroy
 
     respond_to do |format|
-      format.html { redirect_to(activities_url) }
-      format.xml  { head :ok }
+      format.html 
+      format.js 
     end
   end
-end
+
+
+  def update_organizations
+    orgs = load_organizations(params[:country_id])
+	render :update do |page|
+        if orgs.blank?
+            page.replace_html 'organization', :partial => 'organizations', :locals => {:id => params[:country_id], :organizations => nil}
+        else 
+            page.replace_html 'organization', :partial => 'organizations', :locals => {:id => params[:country_id], :organizations => orgs}
+            page[:activity_organization_id].set_style :width => "400px"
+        end
+        page << "initialize();" 
+	end
+  end
+
+
+  def update_study_programs
+	subject_area = SubjectArea.find_by_id(params[:subject_area_id], :include => :study_programs, :order => 'concepts.title', :conditions => [ "concepts.pending = 0 OR concepts.added_by = ?", session[:user_id] ])
+	render :update do |page|
+        if subject_area.blank?
+            page.replace_html 'study_program', :partial => 'study_programs', :locals => {:id => params[:subject_area_id] }, :object => nil
+        else
+            page.replace_html 'study_program', :partial => 'study_programs', :locals => {:id => params[:subject_area_id] }, :object => subject_area.study_programs
+            page[:activity_study_program_id].set_style :width => "400px"
+        end
+        page << "initialize();" 
+	end
+  end
+
+  def update_fields
+	    render :update do |page|
+            if (params[:activity_type] == "full_study")
+                page.hide "exchange_program"
+                page.hide "activity_area"
+                page.show "subject_area"
+                page.show "study_program"
+            elsif (params[:activity_type] == "exchange_study")
+                exchange_programs = ExchangeProgram.find(:all, :order => :title)
+                page.replace_html 'exchange_program', :partial => 'exchange_programs', :locals => {}, :object => exchange_programs 
+                page[:activity_exchange_program_id].set_style :width => "400px" if !exchange_programs.blank?
+                page[:exchange_program].set_style :display => "block";
+                page.hide "activity_area"
+                page.show "subject_area"
+                page.show "study_program"
+            elsif (params[:activity_type] == "internship")
+                activity_areas = ActivityArea.find(:all, :order => :title)
+                page.replace_html 'activity_area', :partial => 'activity_areas', :locals => {}, :object => activity_areas 
+                page[:activity_activity_area_id].set_style :width => "400px" if !activity_areas.blank?
+                page.hide "exchange_program"
+                page.show "activity_area"
+                page.hide "subject_area"
+                page.hide "study_program"
+            end
+            page << "initialize();" 
+        end
+  end
+
+  end

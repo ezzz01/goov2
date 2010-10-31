@@ -1,5 +1,6 @@
 <h1><%= @title %></h1>
 
+<div id="main">
 <% form_for(@concept) do |f| %>
   <%= f.error_messages %>
 
@@ -35,3 +36,9 @@
 <%= link_to t(:back), concepts_path %>
 <span class="span_separator">|</span>
 <%= link_to t(:show), concept_path(@concept.title) %> 
+
+</div>
+
+<div id="sidebar">
+  <%= render :partial => "markup_help" %>  
+</div>
