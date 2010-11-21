@@ -30,6 +30,11 @@ class Ability
         end
 
         if user.try(:username)
+          can :create_country, [Concept]
+          can :create_organization, [Concept]
+        end
+
+        if user.try(:username)
          # can :update, [ ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Concept, Revision]
           can :update, [Concept, Post, Revision]
         end

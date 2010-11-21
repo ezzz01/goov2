@@ -2,5 +2,5 @@
 <%= select_tag("activity[organization_id]", grouped_options_for_select(organizations) ,
   {:prompt   => t(:select_university)}) if !organizations.blank? %>
 	<span id="add_organizations_link">
-        <%= link_to t(:new_university), new_organization_path(:country_id => id) ,:class => 'lbOn' %>
+        <%= link_to t(:new_organization), create_organization_path(:country_id => id), :class => 'lbOn' %>
     </span>

@@ -46,7 +46,17 @@ class ActivitiesController < ApplicationController
 
 
   def update_organizations
-    orgs = load_organizations(params[:country_id])
+    orgs = Concept.find_all_organizations_in_country(params[:country_id]) 
+
+    universities = Hash.new
+    if orgs.length > 0
+      temp = orgs.each { |org|
+        universities[org.title] = org.id }
+    end
+
+    orgs = Hash.new
+    orgs[t(:university)] = universities unless universities.empty?
+
 	render :update do |page|
         if orgs.blank?
             page.replace_html 'organization', :partial => 'organizations', :locals => {:id => params[:country_id], :organizations => nil}

@@ -30,7 +30,8 @@
 </head>
 
 <body>
-<div style="max-width: 1200px">
+<div class="main"> 
+<div>
   <%= nav_link t(:start_page), "site" %>
   <%= nav_link t(:zeitgeist), "zeitgeist" %>
   <%= nav_link t(:questions), "questions" %>
@@ -40,27 +41,32 @@
   <%= nav_link t(:project_blog), "site", "blog"  %>
   <%= nav_link t(:help), "site", "help" %> 
   <span style="float:right">
-  <% if @current_user -%>
-      <%= link_to_unless_current profile_for(current_user) %>
-      <%= nav_link t(:logout), logout_path %>
-  <% else -%>
-      <%= nav_link t(:login), login_path %>
-      <%= nav_link t(:do_register), register_path %> 
-  <% end -%>
+    <% if @current_user -%>
+        <%= link_to_unless_current profile_for(current_user) %>
+        <%= nav_link t(:logout), logout_path %>
+    <% else -%>
+        <%= nav_link t(:login), login_path %>
+        <%= nav_link t(:do_register), register_path %> 
+    <% end -%>
 
-  <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
-      <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
-  <% end %>
-</span>
-        <% if flash[:notice] -%>
-          <div id="notice"><%= flash[:notice] %></div>
-        <% end -%>
-        <% if flash[:error] -%>
-          <div id="error"><%= flash[:error] %></div>
-        <% end -%>
+    <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
+        <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+    <% end %>
+  </span>
+
+      <% if flash[:notice] -%>
+        <div id="notice"><%= flash[:notice] %></div>
+      <% end -%>
+      
+      <% if flash[:error] -%>
+        <div id="error"><%= flash[:error] %></div>
+      <% end -%>
 </div>
-<div>
-  <%= yield %>
+
+  <div>
+    <%= yield %>
+  </div>
+
 </div>
 
 <% if ENV["RAILS_ENV"] == "production" %>

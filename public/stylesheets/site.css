@@ -1,19 +1,19 @@
 body {
-font-family: sans-serif;
-background: white;
-margin: 4;
-text-align: left;
+  font-family: sans-serif;
+  background: white;
+  margin: 4px;
+  text-align: left;
 }
 
 h1 {
-font-family: Georgia, "Times New Roman", Times, serif;
+font-family: Georgia, Times, serif;
 	font-size: 24px;
 	margin-bottom: 22px;
 	color: #333;
 }
 
 h2 {
-font-family: Georgia, "Times New Roman", Times, serif;
+font-family: Georgia, Times, serif;
 	font-size: 20px;
 	margin-bottom: 16px;
 	color: #333;
@@ -132,6 +132,10 @@ label{
 .css4 { font-size: 1.7em; }
 .css5 { font-size: 2.0em; }
 
+.main {
+  max-width: 1200px;
+}
+
 .newWikiWord { background: #dedede;}
 
 .with_border {
@@ -158,11 +162,11 @@ label{
   font-weight: bold;
 }
 
-span.post_date{
+span.post_date {
   font-size: 11px;
 }
 
-span.post_title{
+span.post_title {
   font-weight: bold;
 }
 
@@ -171,12 +175,12 @@ span.post_title{
   padding: 2px;
 }
 
-.notice{
+.notice {
   font-size: 11px;
   color: #ff0000;
 }
 
-.modal{
+.modal {
     margin: 4px;
 }
 

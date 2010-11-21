@@ -1,0 +1,18 @@
+<h1><%= t(:new_organization) %></h1>
+<% remote_form_for(@organization) do |f| %>
+  <%= f.error_messages %>
+ 
+  <p>
+    <%= f.label t(:title) %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.hidden_field :category_list, :value => "Organizacijos" %>
+    <%= hidden_field_tag :concept_type, "organization" %>
+    <%= f.submit t(:create) %>
+  </p>
+<% end %>
+
+
+
+

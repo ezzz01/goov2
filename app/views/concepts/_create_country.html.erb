@@ -1,0 +1,17 @@
+<h1><%= t(:new_country) %></h1>
+<% remote_form_for(@country) do |f| %>
+  <%= f.error_messages %>
+ 
+  <p>
+    <%= f.label t(:title) %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.hidden_field :category_list, :value => "Šalys" %>
+    <%= hidden_field_tag :concept_type, "country" %>
+    <%= f.submit t(:create) %>
+  </p>
+<% end %>
+
+
+

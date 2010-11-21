@@ -38,6 +38,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :tags
 
+  map.create_country "create_country", :controller => "concepts", :action => "create_country"
+  map.create_organization "create_organization/:country_id", :controller => "concepts", :action => "create_organization"
   map.register "register", :controller => "users", :action => "new"
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"

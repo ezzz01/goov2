@@ -65,6 +65,9 @@ class ConceptsController < ApplicationController
   # POST /concepts.xml
   def create
     @concept = Concept.new(params[:concept])
+    if (@concept.revisions.empty?)
+      @concept.revisions.build(:content => "")
+    end
     @concept.revisions.last.author = current_user
     @concept.revisions.last.content += "\n\nKategorijos: " + params[:concept][:category_list]
     @concept.revisions.last.concept = @concept
@@ -77,8 +80,31 @@ class ConceptsController < ApplicationController
         CustomLogger.wikilog.info(I18n.t(:added_new_concept, :user => current_user.username, :title => @concept.title))
         flash[:notice] = t(:page_was_successfully_created) 
         format.html { redirect_to(concept_path(@concept.title)) }
+        format.js { 
+          if (params[:concept_type] == "country")
+            render :update do |page|
+               page.replace_html 'country', :partial => 'activities/countries',  :object => Concept.find_all_countries
+               page << "lightbox.prototype.deactivate();"
+               page << "initialize();" 
+               flash.discard
+            end
+          elsif (params[:concept_type] == "organization")
+            render :update do |page|
+               page << "lightbox.prototype.deactivate();"
+               page << "initialize();" 
+               flash.discard
+            end
+          end
+          }
       else
         format.html { render :action => "new" }
+        format.js { 
+              render :update do |page|
+              page << "alert(' #{t(:error_saving_possibly_duplicate)}');"
+              page << "lightbox.prototype.deactivate();"
+              flash.discard
+            end
+        }
       end
     end
   end
@@ -128,6 +154,20 @@ class ConceptsController < ApplicationController
     @page_names_that_are_wanted = @concepts_in_category.wanted_concepts
     @pages_that_are_orphaned = @concepts_in_category.orphaned_concepts
   end
+ 
+  def create_country
+     @country = Concept.new
+     respond_to do |format|
+      format.html { render :partial => "create_country", :layout => "modal" }
+    end
+  end 
+
+  def create_organization
+     @organization = Concept.new
+     respond_to do |format|
+      format.html { render :partial => "create_organization", :layout => "modal" }
+    end
+  end 
 
   private
 
