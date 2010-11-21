@@ -22,7 +22,9 @@ class Ability
         can :update_fields, :all
         can :autocomplete_tag_list, :all
         can :link_user_accounts, :all
-        can :create, [ Activity, Answer, Comment, Friendship, Question, User ]
+        can :create, [ Activity, Answer, Friendship, User ]
+        #del spamo
+        # can :create, [Comment, Question]
 
         if user.try(:username)
           #can :create, [ActivityArea, Company, Country, ExchangeProgram, ExchangeStudy, FullStudy, Internship, Ngo, Organization, StudyProgram, StudyType, SubjectArea, University, Activity, Post, Concept, Revision]
