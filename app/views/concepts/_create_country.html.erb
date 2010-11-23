@@ -7,7 +7,7 @@
     <%= f.text_field :title %>
   </p>
   <p>
-    <%= f.hidden_field :category_list, :value => "Šalys" %>
+    <%= f.hidden_field :category_list, :value => categories %>
     <%= hidden_field_tag :concept_type, "country" %>
     <%= f.submit t(:create) %>
   </p>

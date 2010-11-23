@@ -90,6 +90,17 @@ class ConceptsController < ApplicationController
             end
           elsif (params[:concept_type] == "organization")
             render :update do |page|
+               orgs = Concept.find_all_organizations_in_country(params[:concept][:country_id])
+#FIXME - turi buti atskiras metodas, kisti i helperi
+               universities = Hash.new
+               if orgs.length > 0
+                 temp = orgs.each { |org|
+                 universities[org.title] = org.id }
+               end
+               orgs = Hash.new
+               orgs[t(:university)] = universities unless universities.empty?
+#END FIXME
+               page.replace_html 'organization', :partial => 'activities/organizations',  :object => orgs 
                page << "lightbox.prototype.deactivate();"
                page << "initialize();" 
                flash.discard
@@ -158,14 +169,15 @@ class ConceptsController < ApplicationController
   def create_country
      @country = Concept.new
      respond_to do |format|
-      format.html { render :partial => "create_country", :layout => "modal" }
+      format.html { render :partial => "create_country", :layout => "modal", :locals => {:categories => "Šalys" } }
     end
   end 
 
   def create_organization
      @organization = Concept.new
+     @country = Concept.find(:first, :conditions => ["id = ?", params[:country_id]])
      respond_to do |format|
-      format.html { render :partial => "create_organization", :layout => "modal" }
+      format.html { render :partial => "create_organization", :layout => "modal", :locals => { :categories => "Organizacijos, " + @country.title, :country_id => params[:country_id] } }
     end
   end 
 

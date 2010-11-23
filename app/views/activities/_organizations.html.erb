@@ -1,6 +1,6 @@
-<%= label_tag ("activity_organization_id", t(:organization_name)) %>
+<%= label_tag("activity_organization_id", t(:organization_name)) %>
 <%= select_tag("activity[organization_id]", grouped_options_for_select(organizations) ,
-  {:prompt   => t(:select_university)}) if !organizations.blank? %>
+  {:prompt   => t(:select_university), :style => "width: 400px;" } ) if !organizations.blank? %>
 	<span id="add_organizations_link">
         <%= link_to t(:new_organization), create_organization_path(:country_id => id), :class => 'lbOn' %>
     </span>
