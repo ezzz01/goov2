@@ -1,5 +1,5 @@
-<div style="float: right">
-  <iframe src="http://www.facebook.com/plugins/like.php?href=www.go-out.lt&amp;layout=standard&amp;show_faces=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:80px;" allowTransparency="true"></iframe>
+<div style="float: right; padding: 4px;">
+  <iframe src="http://www.facebook.com/plugins/like.php?href=www.go-out.lt&amp;layout=standard&amp;show_faces=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:80px;" allowTransparency="true"></iframe>
 </div>
 
   
@@ -27,7 +27,7 @@
   </div>
   <div style="width: 400px; padding: 4px; float: right" class="with_border">
     <h3><%= t(:project_blog) %></h3>
-    <h4><%= @post.title %></h4>
+    <h4><%= post_link(@post) %></h4>
     <span class="smaller"><%= l @post.published, :format => :long %></span>
     <br />
     <%= @post.body %>
