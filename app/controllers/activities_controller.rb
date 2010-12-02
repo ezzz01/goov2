@@ -16,13 +16,7 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    if(params[:my_type] == "full_study")
-        @activity = FullStudy.new(params[:activity])
-    elsif(params[:my_type] == "exchange_study")
-        @activity = ExchangeStudy.new(params[:activity])
-    elsif(params[:my_type] == "internship")
-        @activity = Internship.new(params[:activity])
-    end
+    @activity = Activity.new(params[:activity])
     @user = current_user 
     @activity.user_id = @user.id
     respond_to do |format|
@@ -70,12 +64,12 @@ class ActivitiesController < ApplicationController
 
 
   def update_study_programs
-	subject_area = SubjectArea.find_by_id(params[:subject_area_id], :include => :study_programs, :order => 'concepts.title', :conditions => [ "concepts.pending = 0 OR concepts.added_by = ?", session[:user_id] ])
+	study_programs = Concept.find_all_study_programs_in_subject_area(params[:subject_area_id])
 	render :update do |page|
-        if subject_area.blank?
+        if study_programs.empty?
             page.replace_html 'study_program', :partial => 'study_programs', :locals => {:id => params[:subject_area_id] }, :object => nil
         else
-            page.replace_html 'study_program', :partial => 'study_programs', :locals => {:id => params[:subject_area_id] }, :object => subject_area.study_programs
+            page.replace_html 'study_program', :partial => 'study_programs', :locals => {:id => params[:subject_area_id] }, :object => study_programs
             page[:activity_study_program_id].set_style :width => "400px"
         end
         page << "initialize();" 

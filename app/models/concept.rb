@@ -23,6 +23,10 @@ class Concept < ActiveRecord::Base
     Concept.find_by_sql("SELECT conc.* FROM (concepts conc JOIN wiki_references as ref1 ON ref1.concept_id = conc.id) JOIN wiki_references as ref2 ON ref2.concept_id = conc.id WHERE ref1.link_type = 'C' AND ref1.referenced_name = (select concepts.title FROM concepts WHERE concepts.id = " + country_id.to_s + ") AND ref2.referenced_name = 'Organizacijos'")
   end
 
+  def self.find_all_study_programs_in_subject_area(subj_area_id)
+    Concept.find_by_sql("SELECT conc.* FROM (concepts conc JOIN wiki_references as ref1 ON ref1.concept_id = conc.id) JOIN wiki_references as ref2 ON ref2.concept_id = conc.id WHERE ref1.link_type = 'C' AND ref1.referenced_name = (select concepts.title FROM concepts WHERE concepts.id = " + subj_area_id.to_s + ") AND ref2.referenced_name = 'Studijų programos'")
+  end
+
   def new_revision=(revision_attributes)
    revisions.build(revision_attributes)
  end

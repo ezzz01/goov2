@@ -33,6 +33,7 @@
   :create_new_country => "Sukurti naują šalį",
   :new_organization => "Sukurti naują organizaciją",
   :new_study_program => "Sukurti naują studijų programą",
+  :new_study_program => "Sukurti naują studijų programą",
   :new_exchange_program => "Sukurti naują mainų programą",
   :new_activity_area => "Sukurti naują veiklos sritį",
   :dynamic_preview => "Peržiūra",
@@ -40,6 +41,7 @@
 
   :back => "Atgal",
   :show => "Rodyti",
+  :more => "Daugiau",
   :answer => "Atsakyti",
   :all_answers => "Visi atsakymai",
   :new_answer => "Naujas atsakymas",

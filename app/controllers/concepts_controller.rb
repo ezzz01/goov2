@@ -91,7 +91,7 @@ class ConceptsController < ApplicationController
           elsif (params[:concept_type] == "organization")
             render :update do |page|
                orgs = Concept.find_all_organizations_in_country(params[:concept][:country_id])
-#FIXME - turi buti atskiras metodas, kisti i helperi
+          #FIXME - turi buti atskiras metodas, kisti i helperi
                universities = Hash.new
                if orgs.length > 0
                  temp = orgs.each { |org|
@@ -99,8 +99,15 @@ class ConceptsController < ApplicationController
                end
                orgs = Hash.new
                orgs[t(:university)] = universities unless universities.empty?
-#END FIXME
-               page.replace_html 'organization', :partial => 'activities/organizations',  :object => orgs 
+          #END FIXME
+               page.replace_html 'organization', :partial => 'activities/organizations', :locals => {:id => params[:concept][:country_id], :organizations => orgs } 
+               page << "lightbox.prototype.deactivate();"
+               page << "initialize();" 
+               flash.discard
+            end
+          elsif (params[:concept_type] == "study_program")
+            render :update do |page|
+               page.replace_html 'study_program', :partial => 'activities/study_programs', :locals => {:id => params[:concept][:subject_area_id], :object => Concept.find_all_study_programs_in_subject_area(params[:concept][:subject_area_id])} 
                page << "lightbox.prototype.deactivate();"
                page << "initialize();" 
                flash.discard
@@ -180,6 +187,14 @@ class ConceptsController < ApplicationController
       format.html { render :partial => "create_organization", :layout => "modal", :locals => { :categories => "Organizacijos, " + @country.title, :country_id => params[:country_id] } }
     end
   end 
+
+  def create_study_program
+    @study_program = Concept.new
+    @subj_area = Concept.find(:first, :conditions => ["id = ?", params[:subject_area_id]])
+    respond_to do |format|
+      format.html { render :partial => "create_study_program", :layout => "modal", :locals => { :categories => "Studijų programos, " + @subj_area.title, :subject_area_id => params[:subject_area_id] } }
+    end
+  end
 
   private
 

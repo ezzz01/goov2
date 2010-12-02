@@ -2,6 +2,8 @@ class SiteController < ApplicationController
 
   def index
     @title = t(:start_page) 
+    @user = User.find_by_username('admin')
+    @post = Post.find(:first, :order => "created_at DESC", :conditions => ["user_id = ? AND deleted = 0", @user.id]) 
     @concept = Concept.find_by_title("goout_start")
     @renderer = PageRenderer.new(@concept.revisions.last)
   end

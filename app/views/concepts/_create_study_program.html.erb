@@ -1,5 +1,5 @@
-<h1><%= t(:new_organization) %></h1>
-<% remote_form_for(@organization) do |f| %>
+<h1><%= t(:new_study_program) %></h1>
+<% remote_form_for(@study_program) do |f| %>
   <%= f.error_messages %>
  
   <p>
@@ -8,8 +8,8 @@
   </p>
   <p>
     <%= f.hidden_field :category_list, :value => categories %>
-    <%= f.hidden_field :country_id, :value => country_id %>
-    <%= hidden_field_tag :concept_type, "organization" %>
+    <%= f.hidden_field :subject_area_id, :value => subject_area_id %>
+    <%= hidden_field_tag :concept_type, "study_program" %>
     <%= f.submit t(:create) %>
   </p>
 <% end %>

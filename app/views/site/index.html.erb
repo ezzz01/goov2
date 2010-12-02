@@ -17,6 +17,20 @@
       <%=line + "<br />" %>
     <% end %>
   </div>
+
+</div>
+
+<div id="sidebar">
+  <div style="width: 400px; padding: 4px; float: right" class="with_border">
+    <h3><%= t(:project_blog) %></h3>
+    <h4><%= @post.title %></h4>
+    <span class="smaller"><%= l @post.published, :format => :long %></span>
+    <br />
+    <%= @post.body %>
+  <br />
+    <%= link_to t(:more), :controller => "site", :action => "blog" %>
+  </div>
+
 </div>
 
 

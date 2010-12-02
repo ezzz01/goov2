@@ -34,6 +34,7 @@ class Ability
         if user.try(:username)
           can :create_country, [Concept]
           can :create_organization, [Concept]
+          can :create_study_program, [Concept]
         end
 
         if user.try(:username)

@@ -54,5 +54,7 @@ Time.send(:private, :ago_as_lt_words, :since_as_lt_words)
 Time.extend Arturaz::AsLtWords::TimeExtensions::ClassMethods
 Integer.send(:include, Arturaz::AsLtWords::IntegerExtensions::InstanceMethods)
 
+ACTIVITIES = {:full_study => 'full_study', :exchange_study => 'exchange_study', :internship => 'internship', :volunteer => 'volunteer', :other => 'other' }
+
 ENV['XD_RECEIVER_LOCATION'] = "/fb/connect/xd_receiver.htm"
 ENV['FACEBOOK_AUTHENTICATE_LOCATION'] = "/fb/authenticate"
