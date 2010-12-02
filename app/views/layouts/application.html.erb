@@ -49,6 +49,10 @@
         <%= nav_link t(:do_register), register_path %> 
     <% end -%>
 
+<fb:login-button size="small"
+                 onlogin="Log.info('onlogin callback')">
+  Connect
+</fb:login-button>
     <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
         <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
     <% end %>
