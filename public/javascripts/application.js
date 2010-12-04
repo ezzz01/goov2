@@ -16,32 +16,6 @@ function ge(elem) {
 }
 
 /*
- * Ensure Facebook app is initialized and call callback afterward
- *
- */
-function ensure_init(callback) {
-  if(!window.api_key) {
-    window.alert("api_key is not set");
-  }
-
-  if(window.is_initialized) {
-    callback();
-  } else {
-    FB_RequireFeatures(["XFBML", "CanvasUtil"], function() {
-        FB.FBDebug.logLevel = 4;
-        FB.FBDebug.isEnabled = true;
-        // xd_receiver.php is a relative path here, because The Run Around
-        // could be installed in a subdirectory
-        // you should prefer an absolute URL (like "/xd_receiver.php") for more accuracy
-        FB.Facebook.init(window.api_key, window.xd_receiver_location);
-
-        window.is_initialized = true;
-        callback();
-      });
-  }
-}
-
-/*
  * "Session Ready" handler. This is called when the facebook
  * session becomes ready after the user clicks the "Facebook login" button.
  * In a more complex app, this could be used to do some in-page
