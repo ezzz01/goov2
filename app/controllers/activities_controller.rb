@@ -84,7 +84,7 @@ class ActivitiesController < ApplicationController
                 page.show "subject_area"
                 page.show "study_program"
             elsif (params[:activity_type] == "exchange_study")
-                exchange_programs = ExchangeProgram.find(:all, :order => :title)
+                exchange_programs = Concept.find_all_exchange_programs
                 page.replace_html 'exchange_program', :partial => 'exchange_programs', :locals => {}, :object => exchange_programs 
                 page[:activity_exchange_program_id].set_style :width => "400px" if !exchange_programs.blank?
                 page[:exchange_program].set_style :display => "block";

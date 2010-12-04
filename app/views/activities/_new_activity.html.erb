@@ -3,10 +3,11 @@
     <%= error_messages_for 'activity' %>
     <div id="activity_type">
         <%= f.label ("my_type", t(:activity_type)) %>
-        <%= select_tag "my_type", options_for_select([[t(:full_study), "full_study"], [t(:exchange_study), "exchange_study"], [t(:internship), "internship"], [t(:volunteer), "volunteer"], [t(:other), "other"]] ),
-        {:style => "width: 400px;", :onchange => "#{remote_function(:url  => {:action => "update_fields"},
-   		 :with => "'activity_type='+value")}"}   %>
+        <%= select_tag "activity[activity_type]", options_for_select( prepare_options_for_select(ACTIVITIES)) ,
+        {:style => "width: 400px;", :onchange => "#{remote_function(:url => {:action => "update_fields"},
+          :with => "'activity_type='+value")}"}  %>
     </div>
+    
     <div id="exchange_program" style="display: none" ></div>
     <div id="country">
         <%= f.label ("activity_country_id", t(:country)) %>

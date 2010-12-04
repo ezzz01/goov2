@@ -19,6 +19,10 @@ class Concept < ActiveRecord::Base
     Concept.find(:all, :order => "title", :joins => "join wiki_references on wiki_references.concept_id = concepts.id", :conditions => ["wiki_references.link_type = 'C' AND wiki_references.referenced_name = ?", "Studijų sritys"])
   end
 
+  def self.find_all_exchange_programs
+    Concept.find(:all, :order => "title", :joins => "join wiki_references on wiki_references.concept_id = concepts.id", :conditions => ["wiki_references.link_type = 'C' AND wiki_references.referenced_name = ?", "Mainų programos"])
+  end
+
   def self.find_all_organizations_in_country(country_id)
     Concept.find_by_sql("SELECT conc.* FROM (concepts conc JOIN wiki_references as ref1 ON ref1.concept_id = conc.id) JOIN wiki_references as ref2 ON ref2.concept_id = conc.id WHERE ref1.link_type = 'C' AND ref1.referenced_name = (select concepts.title FROM concepts WHERE concepts.id = " + country_id.to_s + ") AND ref2.referenced_name = 'Organizacijos'")
   end

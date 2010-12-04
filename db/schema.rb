@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101023130948) do
+ActiveRecord::Schema.define(:version => 20101204143115) do
 
   create_table "activities", :force => true do |t|
-    t.string   "type"
+    t.string   "activity_type"
     t.integer  "user_id"
     t.integer  "study_program_id"
     t.integer  "exchange_program_id"

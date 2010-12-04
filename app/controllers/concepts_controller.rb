@@ -91,7 +91,7 @@ class ConceptsController < ApplicationController
           elsif (params[:concept_type] == "organization")
             render :update do |page|
                orgs = Concept.find_all_organizations_in_country(params[:concept][:country_id])
-          #FIXME - turi buti atskiras metodas, kisti i helperi
+                  #FIXME - turi buti atskiras metodas, kisti i helperi
                universities = Hash.new
                if orgs.length > 0
                  temp = orgs.each { |org|
@@ -99,7 +99,7 @@ class ConceptsController < ApplicationController
                end
                orgs = Hash.new
                orgs[t(:university)] = universities unless universities.empty?
-          #END FIXME
+                  #END FIXME
                page.replace_html 'organization', :partial => 'activities/organizations', :locals => {:id => params[:concept][:country_id], :organizations => orgs } 
                page << "lightbox.prototype.deactivate();"
                page << "initialize();" 
@@ -108,6 +108,13 @@ class ConceptsController < ApplicationController
           elsif (params[:concept_type] == "study_program")
             render :update do |page|
                page.replace_html 'study_program', :partial => 'activities/study_programs', :locals => {:id => params[:concept][:subject_area_id], :object => Concept.find_all_study_programs_in_subject_area(params[:concept][:subject_area_id])} 
+               page << "lightbox.prototype.deactivate();"
+               page << "initialize();" 
+               flash.discard
+            end
+          elsif (params[:concept_type] == "exchange_program")
+            render :update do |page|
+               page.replace_html 'exchange_program', :partial => 'activities/exchange_programs', :locals => {:id => params[:concept][:exchange_program_id], :object => Concept.find_all_exchange_programs }
                page << "lightbox.prototype.deactivate();"
                page << "initialize();" 
                flash.discard
@@ -177,6 +184,13 @@ class ConceptsController < ApplicationController
      @country = Concept.new
      respond_to do |format|
       format.html { render :partial => "create_country", :layout => "modal", :locals => {:categories => "Šalys" } }
+    end
+  end 
+
+  def create_exchange_program 
+     @exchange_program = Concept.new
+     respond_to do |format|
+      format.html { render :partial => "create_exchange_program", :layout => "modal", :locals => {:categories => "Mainų programos" } }
     end
   end 
 
