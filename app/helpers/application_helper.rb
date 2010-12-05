@@ -34,6 +34,13 @@ module ApplicationHelper
           flash[:notice] = t(:no_such_user)
           redirect_to users_path 
         end
+    elsif params[:user_id]
+       if User.exists?(params[:user_id])
+          @user = User.find_by_id(params[:user_id]) 
+       else
+          flash[:notice] = t(:no_such_user)
+          redirect_to users_path 
+       end
     else
       flash[:notice] = t(:no_such_user)
       redirect_to users_path
