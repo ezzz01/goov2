@@ -46,7 +46,7 @@
 
   <p>
     <%= f.label :current_country %><br />
-    <%= collection_select("user", :current_country_id, Country.all, :id, :title, {:include_blank => true} ) %>
+    <%= collection_select("user", :current_country_id, Concept.find_all_countries, :id, :title, {:include_blank => true} ) %>
   </p>
 
   <p>

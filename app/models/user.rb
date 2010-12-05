@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   after_create :register_user_to_fb
 
   has_many :activities
-  belongs_to :current_country, :class_name => "Country"
+  belongs_to :current_country, :class_name => "Concept"
   has_many :posts, :order => "created_at DESC"
   has_one :avatar, :dependent => :destroy
   has_many :userroles, :class_name => "UserRole"
