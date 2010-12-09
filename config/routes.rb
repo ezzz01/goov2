@@ -42,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   map.create_organization "create_organization/:country_id", :controller => "concepts", :action => "create_organization"
   map.create_study_program "create_study_program/:subject_area_id", :controller => "concepts", :action => "create_study_program"
   map.create_exchange_program "create_exchange_program", :controller => "concepts", :action => "create_exchange_program"
+  map.create_activity_area "create_acitivity_area", :controller => "concepts", :action => "create_activity_area"
   map.register "register", :controller => "users", :action => "new"
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"

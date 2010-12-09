@@ -51,6 +51,11 @@
         <%= f.label ("activity_to", t(:to)) %>
         <%= date_select("activity", "to", options = {:start_year => Time.now.year - 15} ) %> 
     </div>
+    <div id="description">
+      <%= f.label ("description", t(:description)) %>
+      <%= f.text_area :description, :size => "60x2" %>
+    </div>
+
     <%= f.submit t(:create) %>
 
     <%= button_to_function t(:cancel) do |page|

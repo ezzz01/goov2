@@ -24,12 +24,12 @@
   <span><%= activity.from %></span> - <span><%= activity.current ? t(:current) : activity.to %></span>
 
   <div>
-    <%= activity.organization.title unless activity.organization.blank? %>
+    <%= link_to activity.organization.title, page_path(activity.organization.title) unless activity.organization.blank? %>
   </div>
 
-  <% if activity.activity_type == ACTIVITIES[1].to_s %>
+  <% if activity.activity_type == (ACTIVITIES[2].to_s || ACTIVITIES[3].to_s)  %> 
     <div>
-      <%= activity.activity_area.title unless activity.activity_area.blank? %>
+      <%= link_to activity.activity_area.title, page_path(activity.activity_area.title)  %> 
     </div>
   <% end %>
 
@@ -38,6 +38,10 @@
       <%= link_to activity.study_program.title, page_path(activity.study_program.title) unless activity.study_program.blank?%>
     </div>
   <% end %>
+
+    <div>
+      <%= activity.description %> 
+    </div>
 
   <br />
 </div>

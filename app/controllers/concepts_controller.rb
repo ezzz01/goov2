@@ -119,6 +119,14 @@ class ConceptsController < ApplicationController
                page << "initialize();" 
                flash.discard
             end
+          elsif (params[:concept_type] == "activity_area")
+            render :update do |page|
+               page.replace_html 'activity_area', :partial => 'activities/activity_areas', :locals => {:id => params[:concept][:activity_area_id], :object => Concept.find_all_activity_areas}
+               page << "lightbox.prototype.deactivate();"
+               page << "initialize();" 
+               flash.discard
+            end
+
           end
           }
       else
@@ -207,6 +215,13 @@ class ConceptsController < ApplicationController
     @subj_area = Concept.find(:first, :conditions => ["id = ?", params[:subject_area_id]])
     respond_to do |format|
       format.html { render :partial => "create_study_program", :layout => "modal", :locals => { :categories => "Studijų programos, " + @subj_area.title, :subject_area_id => params[:subject_area_id] } }
+    end
+  end
+
+  def create_activity_area 
+    @activity_area = Concept.new
+    respond_to do |format|
+      format.html { render :partial => "create_activity_area", :layout => "modal", :locals => { :categories => "Veiklos sritys" } }
     end
   end
 

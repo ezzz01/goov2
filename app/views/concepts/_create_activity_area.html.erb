@@ -1,0 +1,14 @@
+<h1><%= t(:new_activity_area) %></h1>
+<% remote_form_for(@activity_area) do |f| %>
+  <%= f.error_messages %>
+ 
+  <p>
+    <%= f.label t(:title) %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.hidden_field :category_list, :value => categories %>
+    <%= hidden_field_tag :concept_type, "activity_area" %>
+    <%= f.submit t(:create) %>
+  </p>
+<% end %>

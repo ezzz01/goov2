@@ -36,6 +36,7 @@ class Ability
           can :create_organization, [Concept]
           can :create_study_program, [Concept]
           can :create_exchange_program, [Concept]
+          can :create_activity_area, [Concept]
         end
 
         if user.try(:username)

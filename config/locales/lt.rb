@@ -14,6 +14,7 @@
   :project_blog => "Projekto blogas",
   :countries => "Šalys",
   :title => "Pavadinimas",
+  :description => "Aprašymas",
   :tag_list => "Žymės",
   :tags => "Žymės",
   :tags_with_hint => "Žymės (skirtukas - kablelis)",
