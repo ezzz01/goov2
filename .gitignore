@@ -7,4 +7,3 @@ public/avatars/**/*
 vendor/plugins/tunnlr_connector
 tunnlr.yml
 facebooker.yml
-config/environment.rb
