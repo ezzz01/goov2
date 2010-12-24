@@ -23,6 +23,8 @@ role :db,  domain
 
 before "deploy:restart", "environment:production"
 before "deploy:start", "environment:production"
+before "deploy:restart", "environment:copy_environment"
+before "deploy:start", "environment:copy_environment"
 before "deploy:restart", "db:symlink" 
 before "deploy:migrate", "db:symlink" 
 after "deploy:symlink", "customs:symlink"
@@ -30,6 +32,11 @@ after "deploy:symlink", "customs:facebooker"
 after "deploy", "deploy:cleanup"
 
 namespace :environment do
+  task :copy_environment do
+    desc "Make symlink for environment.rb" 
+      run "ln -nfs ~/.ssh/environment.rb#{release_path}/config/environment.rb"
+  end
+
   task :production do
     set :rails_env, 'production' 
   end
