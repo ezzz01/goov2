@@ -51,6 +51,7 @@ class UsersController < ApplicationController
         if @user.save
           flash[:notice] = t(:registration_successful) 
           session[:user_id] = @user.id
+          email = InfoMailer.deliver_inform_about_new_registration(@user.username)
           format.html { redirect_to user_profile_path(@user.try(:username)) }
         else 
           @user.clear_password!
