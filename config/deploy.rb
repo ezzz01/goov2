@@ -33,8 +33,8 @@ after "deploy", "deploy:cleanup"
 
 namespace :environment do
   task :copy_environment do
-    desc "Make symlink for environment.rb" 
-      run "ln -nfs ~/.ssh/environment.rb #{release_path}/config/environment.rb"
+    desc "copy environment.rb" 
+      run "cp ~/.ssh/environment.rb #{release_path}/config/environment.rb"
   end
 
   task :production do
