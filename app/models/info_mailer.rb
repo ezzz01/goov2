@@ -10,4 +10,13 @@ class InfoMailer < ActionMailer::Base
     body       :username => username 
   end
 
+  def greet_new_user(username, address, sent_at = Time.now)
+    charset    'utf8'
+    subject    'Registracija go-out.lt'
+    recipients address 
+    from       'admin@go-out.lt'
+    sent_on    sent_at
+    body       :username => username 
+  end
+
 end
