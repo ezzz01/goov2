@@ -92,10 +92,11 @@ class ApplicationController < ActionController::Base
   private
 
   def require_no_user
+    puts "inside require_no_user"
     if current_user
       session[:protected_page] = request.request_uri
       flash[:notice] = t(:must_be_logged_out) 
-      redirect_to_forwarding_url
+      redirect_to user_profile_path(current_user.username)
       return false
     end
   end
