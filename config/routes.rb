@@ -2,6 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect '/fb/:action', :controller => 'facebook'
 
+  map.resources :password_resets
   map.resources :votes
   map.resources :answers
   map.resources :questions, :collection => { :unanswered => :get }
@@ -46,6 +47,7 @@ ActionController::Routing::Routes.draw do |map|
   map.register "register", :controller => "users", :action => "new"
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"
+  map.reset_password "reset_password", :controller => "password_resets", :action => "new"
   map.blog 'user/:user/blog', :controller => "posts", :action => "index"
   map.post 'user/:user/blog/:id', :controller => 'posts', :action => 'show', :id => ''
   map.user_profile 'user/:user', :controller => "users", :action => "show"

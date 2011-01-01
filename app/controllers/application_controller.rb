@@ -89,6 +89,17 @@ class ApplicationController < ActionController::Base
     PageRenderer.teardown_url_generator
   end
 
+  private
+
+  def require_no_user
+    if current_user
+      session[:protected_page] = request.request_uri
+      flash[:notice] = t(:must_be_logged_out) 
+      redirect_to_forwarding_url
+      return false
+    end
+  end
+    
 
 
 end

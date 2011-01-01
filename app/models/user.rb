@@ -78,6 +78,11 @@ class User < ActiveRecord::Base
     self.current_password = nil
   end
 
+  def deliver_password_reset_instructions!  
+    reset_perishable_token!  
+    InfoMailer.deliver_password_reset_instructions(self)  
+  end  
+
 #The Facebook registers user method is going to send the users email hash and our account id to Facebook
 #We need this so Facebook can find friends on our local application even if they have not connect through connect
 #We then use the email hash in the database to later identify a user from Facebook with a local user

@@ -1,0 +1,28 @@
+<h1><%= t(:change_password) %></h1>
+
+<div class="float_left standard_width">
+
+ <fieldset>
+    <legend><%=t :enter_your_details %></legend>
+
+<% form_for @user, :url => password_reset_path, :method => :put do |f| %>
+  <%= f.error_messages %>
+  <%= f.label t(:password) %>
+
+  <div class="form_row">
+    <%= f.password_field :password %>
+  </div>
+
+  <%= f.label t(:password_confirm) %>
+  <div class="form_row">
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <p>
+    <%= f.submit t(:update_password) %>
+  </p>
+
+<% end %>
+
+  </fieldset>
+</div>

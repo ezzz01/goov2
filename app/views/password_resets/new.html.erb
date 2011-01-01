@@ -1,0 +1,21 @@
+<h1><%= t(:password_reset) %></h1>
+
+<div class="float_left standard_width">
+
+  <fieldset>
+    <legend>
+      <%= t(:how_to_reset_password) %>
+    </legend>
+
+  <% form_tag password_resets_path do %>
+    <label><%= t(:email) %></label>
+    <%= text_field_tag "email" %>
+
+    <p>
+      <%= submit_tag t(:password_reset) %>
+    </p>
+
+  <% end %>
+
+   </fieldset>
+</div>
