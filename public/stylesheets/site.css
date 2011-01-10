@@ -1,35 +1,124 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
-  background: white;
-  margin: 4px;
+  margin: 0px;
+  padding: 0px;
   text-align: left;
+  font-size: 13px;
+  color: #444444;
+  height: 100%;
+}
+
+#menu {
+  height: 100px;
+}
+
+#wrapper {
+  height: auto !important;
+  margin: 0 auto -80px;
+  min-height: 100%;
+  position: relative;
+  max-width: 1200px;
+}
+
+#push {
+  height: 90px;
+}
+
+#footer_container {
+  position: relative;
+  height: 80px;
+  background-color: #444444;
+}
+
+#footer {
+  padding-top: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#footer a {
+  color: #fff;
+
+}
+
+#main {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+
+#sidebar { 
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+}
+
+#fb_likes {
+  height: 100%;
+  padding: 4px;
 }
 
 h1 {
-font-family: Georgia, Times, serif;
+    font-family: Georgia, Times, serif;
 	font-size: 24px;
 	margin-bottom: 22px;
 	color: #333;
 }
 
 h2 {
-font-family: Georgia, Times, serif;
+    font-family: Georgia, Times, serif;
 	font-size: 20px;
 	margin-bottom: 16px;
 	color: #333;
 }
 
-a { color: #000; }
-a:visited { color: #666; }
-a:hover { color: #fff; background-color:#000; }
+h3 {
+  font-family: Georgia, Times, serif;
+  color: #4AC0F2;
+}
 
-fieldset{
+a { 
+  color: #4AC0F2;
+  text-decoration: none;
+}
+
+a:visited { 
+  color: #666; 
+}
+
+
+a:hover { color: #fff; background-color:#444; }
+
+.header {
+  font-size: 18px;
+  padding: 16px;
+  color: #4AC0F2;
+}
+
+.header a {
+  padding: 4px;
+  color: #4AC0F2;
+  text-decoration: none;
+}
+
+.header a:hover {
+  color: #fff; 
+  background-color:  #4AC0F2;
+}
+
+
+fieldset {
   margin-top: 1em;
   padding-top: 2em;
   padding-bottom: 2em;
 }
 
-legend{
+legend {
   padding: .4em 1em;
 }
 
@@ -38,13 +127,13 @@ legend{
   padding-bottom: .5em;
 }
 
-pre{
+pre {
   background-color:#DDDDDD;
   overflow:auto;
   padding:1em;
 }
 
-label{
+label {
   display: block;
   padding-bottom: 10px;
 }
@@ -131,14 +220,6 @@ label{
 .css3 { font-size: 1.3em; }
 .css4 { font-size: 1.7em; }
 .css5 { font-size: 2.0em; }
-
-.menu {
-  padding: 16px;
-}
-
-.main {
-  max-width: 1200px;
-}
 
 .newWikiWord { background: #dedede;}
 
@@ -233,7 +314,7 @@ img {
 }
 
 .standard_width{
- width: 400px;
+    width: 400px;
 }
 
 .blog_post_header {
@@ -259,16 +340,6 @@ img {
 .comment_form {
     margin-left: 12px;
 }
-
-#main {
-    float: left; 
-    width: 75%;
-    }
-
-#sidebar { 
-    float: right;
-    width: 25%;
-    }
 
 .gooutuser {
   font-weight: bold;
@@ -351,7 +422,7 @@ div.auto_complete {
 }
 
 .box {
-  
+  height: 100%;
   border:  1px solid #aaaaaa;
   margin: 4px;
   padding: 4px;
