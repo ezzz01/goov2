@@ -1,8 +1,13 @@
-<div id="fb_likes"> 
-  <iframe src="http://www.facebook.com/plugins/like.php?href=www.go-out.lt&amp;layout=standard&amp;show_faces=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:80px;" allowTransparency="true"></iframe>
-</div>
-  
 <div id="main">
+
+  <div id="illustrations">
+    <div id="ill1">
+      <div class="above_illus"><%= t(:want_to_study) %></div>
+    </div>
+    <div id="ill2">
+      <div class="above_illus"><%= t(:are_you_studing) %></div>
+    </div>
+  </div>
 
   <div class="box">
     <%= link_to t(:unanswered_questions), unanswered_questions_path %>
@@ -19,7 +24,12 @@
 </div>
 
 <div id="sidebar">
-  <div style="height: 100%; width: 400px; padding: 4px;" class="with_border">
+
+  <div id="fb_likes"> 
+    <iframe src="http://www.facebook.com/plugins/like.php?href=www.go-out.lt&amp;layout=standard&amp;show_faces=true&amp;width=350&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:80px;" allowTransparency="true"></iframe>
+  </div>
+
+  <div>
     <h3><%= t(:project_blog) %></h3>
     <h4><%= post_link(@post) %></h4>
     <span class="smaller"><%= l @post.published, :format => :long %></span>

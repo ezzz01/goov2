@@ -33,29 +33,40 @@
 
 <div id="wrapper">
 
-  <div class="header">
-    <%= link_to image_tag('/images/logo.png', :border=> 0), :controller=> "site" %>
-    <%= nav_link t(:zeitgeist), "zeitgeist" %>
-    <%= nav_link t(:questions), "questions" %>
-    <%= nav_link t(:users), "users" %>
-    <%= nav_link t(:wiki), "concepts", "index"  %>
-    <%= nav_link t(:project_blog), "site", "blog"  %>
-    <%= nav_link t(:help), "site", "help" %> 
-  
-     <span style="float:right">
-      <% if @current_user -%>
-          <%= link_to_unless_current profile_for(current_user) %>
-          <%= nav_link t(:logout), logout_path %>
-      <% else -%>
-          <%= nav_link t(:login), login_path %>
-          <%= nav_link t(:do_register), register_path %> 
-      <% end -%>
+     <div id="login">
+      <ul>
+        <% if @current_user -%>
+            <li> <%= link_to_unless_current profile_for(current_user) %> </li>
+            <li> <%= nav_link t(:logout), logout_path %> </li>
+        <% else -%>
+            <li> <%= nav_link t(:login), login_path %> </li>
+            <li> <%= nav_link t(:do_register), register_path %> </li>
+        <% end -%>
 
-      <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
-          <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
-      <% end %>
-    </span>
+            <li>
+              <% unless (defined?(@current_user.fb_user_id) && defined?(facebook_session.user) && (@current_user.fb_user_id.to_s == facebook_session.user.to_s)) %>
+                <%= fb_login_button('window.location = "/users/link_user_accounts";')%>
+              <% end %>
+            </li>
+      </ul>
+    </div>
 
+  <div id="header">
+
+    <div id="logo">
+      <%= link_to image_tag('/images/logo.png', :border=> 0), :controller=> "site" %>
+    </div>
+
+    <div id="navigation">
+      <ul>
+        <li><%= nav_link t(:zeitgeist), "zeitgeist" %></li>
+        <li><%= nav_link t(:questions), "questions" %></li>
+        <li><%= nav_link t(:users), "users" %></li>
+        <li><%= nav_link t(:wiki), "concepts", "index" %></li>
+        <li><%= nav_link t(:project_blog), "site", "blog"  %></li>
+        <li><%= nav_link t(:help), "site", "help" %></li> 
+      </ul>
+    </div>
       <% if flash[:notice] -%>
           <div id="notice"><%= flash[:notice] %></div>
         <% end -%>
@@ -66,8 +77,7 @@
 
   </div>
 
-
-   <%= yield %>
+  <%= yield %>
 
   <div id="push"></div>
 

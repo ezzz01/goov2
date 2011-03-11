@@ -2,6 +2,8 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 {
 :lt => {
+  :want_to_study => "Nori studijuoti užsienyje?",
+  :are_you_studing => "Studijuoji užsienyje?",
   :mydate => "Data",
   :start_page => "Pirmas puslapis",
   :users => "Vartotojai",

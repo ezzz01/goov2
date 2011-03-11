@@ -9,7 +9,7 @@ body {
   text-align: left;
   font-size: 13px;
   color: #444444;
-  background-color: #f1f1f1;
+  background-color: #eaeaea;
   height: 100%;
 }
 
@@ -27,7 +27,7 @@ body {
   margin: 0 auto -80px;
   min-height: 100%;
   position: relative;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 
 #push {
@@ -42,7 +42,7 @@ body {
 
 #footer {
   padding-top: 20px;
-  max-width: 1200px;
+  max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -51,16 +51,22 @@ body {
   color: #fff;
 }
 
+#test{
+  height: 100%;
+}
+
 #main {
     display: inline-block;
     vertical-align: top;
     height: 100%;
+    width: 69%;
 }
 
 #sidebar { 
     display: inline-block;
     vertical-align: top;
     height: 100%;
+    width: 30%;
 }
 
 #fb_likes {
@@ -69,14 +75,14 @@ body {
 }
 
 h1 {
-    font-family: Georgia, Times, serif;
-	font-size: 24px;
+    font-family: Museo, Georgia, Times, serif;
+	font-size: 22px;
 	margin-bottom: 22px;
 	color: #333;
 }
 
 h2 {
-    font-family: Georgia, Times, serif;
+    font-family: Museo, Georgia, Times, serif;
 	font-size: 20px;
 	margin-bottom: 16px;
 	color: #333;
@@ -85,39 +91,132 @@ h2 {
 h3 {
   font-family: Museo, Georgia, Times, serif;
   text-transform: uppercase;
-  color: #18bdd3;
+  color: #707070;
 }
 
-a { 
-  color: #18bdd3;
+a {
+  color: #394046;
   text-decoration: none;
 }
 
-a:visited { 
-  color: #666; 
+a:hover {
+  color: #1abcd5;
 }
 
+#header {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 100px;
+}
 
-a:hover { color: #fff; background-color:#444; }
+#logo {
+  float: left;
+}
 
-.header {
-  font-family: Museo, Georgia, Times, serif;
+#login {
+  width: 500px;
+  float: right;
+}
+
+#login ul {
+  float: right;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} 
+
+#login li {
+  float: left;
+  border-left: 1px solid #f1f1f1;
+}
+
+#login ul li a {
+  background-color: #454545;
+  width: 140px;
+  height: 30px;
+  color: #f2f2f2;
+  text-align: center;
+  display: block;
+  text-transform: uppercase;
+  line-height: 26px;
+}
+
+#login ul li a:hover {
+  border-left: 1px solid #f2f2f2;
+  color: #454545;
+  background-color: #f2f2f2;
+}
+
+#navigation {
+  float: right;
+  padding-top: 70px;
+  color: #707070;
   font-size: 18px;
-  padding: 16px;
-  color: #18bdd3;
+  font-family: Museo, Georgia, Times, serif;
 }
 
-.header a {
-  padding: 4px;
-  color: #18bdd3;
-  text-decoration: none;
+#navigation ul {
+  float: right;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} 
+
+#navigation ul li {
+  display: inline;
+  margin-left: 20px;
+  padding-bottom: 10px;
 }
 
-.header a:hover {
-  color: #fff; 
-  background-color:  #18bdd3;
+.current_link {
+  color: #1abcd5;
 }
 
+#navigation li:hover {
+  background: url('/images/underline.png') repeat-x scroll left bottom transparent;
+}
+
+#navigation a {
+  color: #707070;
+}
+
+#navigation a:hover {
+  color: #1abcd5;
+}
+
+#illustrations {
+  padding: 20px;
+  height: 220px;
+  width: 100%;
+}
+
+.above_illus {
+  margin-left: 0px;
+  margin-right: 0px;
+  text-align: center;
+  font-size: 16px;
+  font-family: Museo, Georgia, Times, serif;
+
+}
+
+#ill1 {
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  background-image: url('/images/nori_studijuoti.png');
+  background-repeat: no-repeat;
+  background-position: 20px 30px;
+}
+
+#ill2 {
+  margin-left: 80px;
+  display: inline-block;
+  width: 240px;
+  height: 240px;
+  background-image: url('/images/studijuoji.png');
+  background-repeat: no-repeat;
+  background-position: 20px 30px;
+}
 
 fieldset {
   margin-top: 1em;
@@ -389,7 +488,6 @@ h3.ask_question {
   width: 500px;
   margin 4px;
   padding: 4px;
-  border: 1px solid  #aaaaaa;
   font-size: 12px;
 }
 
@@ -430,7 +528,6 @@ div.auto_complete {
 
 .box {
   height: 100%;
-  border:  1px solid #aaaaaa;
   margin: 4px;
   padding: 4px;
   padding-bottom: 20px;

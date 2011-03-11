@@ -3,7 +3,7 @@ module ApplicationHelper
   require 'string'
 
   def nav_link(text, controller, action="index")
-    link_to_unless_current text, :id => nil, :controller => controller, :action => action
+    link_to_unless_current text, :id => nil, :controller => controller, :action => action do "<span class=\"current_link\">" + text + "</span>" end
   end
 
   def profile_for(user)
